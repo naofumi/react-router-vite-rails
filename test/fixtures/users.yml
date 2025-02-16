@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sazae:
+  email: sazae@example.com
+  clear_password: hogehoge
+
+masuo:
+  email: masuo@example.com
+  clear_password: hogehoge

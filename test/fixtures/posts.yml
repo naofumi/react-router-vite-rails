@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+first_post:
+  content: This is my first post
+
+second_post:
+  content: This is my second post
+
+third_post:
+  content: This is my third post
+
+fourth_post:
+  content: This is my fourth post

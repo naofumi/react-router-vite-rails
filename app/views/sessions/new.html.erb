@@ -1,0 +1,18 @@
+<div class="login_form">
+  <h1 class="login_form__header">Login</h1>
+  <%= form_with url: sessions_path, method: :post do |f| %>
+    <p style="color: red"><%= flash[:alert] %></p>
+
+    <div class="login_form__group">
+      <%= f.label :email, class: "login_form__label" %>
+      <%= f.text_field :email, class: "login_form__input" %>
+    </div>
+    <div class="login_form__group">
+      <%= f.label :clear_passwords, class: "login_form__label" %>
+      <%= f.password_field :clear_password, class: "login_form__input" %>
+    </div>
+    <div class="login_form__controls">
+      <%= f.submit "Login", class: "login_form__button--submit" %>
+    </div>
+  <% end %>
+</div>
