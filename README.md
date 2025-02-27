@@ -2,6 +2,8 @@
 
 This is an example web application demonstrating how to integrate React Router Framework/SPA mode and Ruby on Rails.
 
+[Jump to how to build it](#how-it-is-built)
+
 ## The problem
 
 Historically,
