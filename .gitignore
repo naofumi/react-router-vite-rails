@@ -38,3 +38,4 @@
 
 # Ignore editor
 .idea
+/.kamal/secrets-common
