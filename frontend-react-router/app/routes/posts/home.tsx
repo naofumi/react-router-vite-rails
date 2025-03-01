@@ -44,7 +44,7 @@ export default function PostsHome({loaderData}: Route.ComponentProps) {
   const {posts} = loaderData
 
   return (
-    <Main title="Post">
+    <Main title="Posts">
       <div className="mt-8">
         <CommandBar>
           <span></span>

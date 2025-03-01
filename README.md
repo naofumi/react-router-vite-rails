@@ -54,7 +54,7 @@ and [use static export](https://nextjs.org/docs/app/building-your-application/up
 This will also allow you
 to host static files in the Ruby on Rails `public` folder although there are difficulties with dynamic routes. 
 
-## How it is built
+## Building the Integration
 
 I have heavily added comments to each file. Please look through these to see how the application is configured.
 
