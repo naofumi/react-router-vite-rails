@@ -62,6 +62,9 @@ export function Welcome() {
           simpler and cheaper SPAs, we must be careful not to just go back to the SPAs of our memories,
           forgetting that the kerfuffle of package dependencies, state management and data-fetch waterfalls
           was anything but simple.
+          We must also remind ourselves that contrary to the promise of a smooth, app-like user experience,
+          SPAs were often ridiculed for their <a href="https://williamkennedy.ninja/javascript/2022/05/03/in-defence-of-the-single-page-application/" className="underline text-yellow-600" target="_blank">
+          disappointing real world performance</a>.
         </p>
         <p className="hyphens-auto text-justify mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-600">
           Instead we must take advantage of our learnings from the past few years which are
