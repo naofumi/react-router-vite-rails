@@ -19,7 +19,7 @@ servers:
 # Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
 proxy:
   ssl: true
-  host: "react-router-vite-rails.castle104.com"
+  host: rrrails.castle104.com
   app_port: 80
 
 # Credentials for your image host.
