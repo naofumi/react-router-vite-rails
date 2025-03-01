@@ -1,11 +1,27 @@
 <% content_for :title, "New post" %>
 
-<h1>New post</h1>
+<%= render "main", title: "New Post" do %>
+  <div class="command-bar">
+    <%= link_to posts_path, class: "button button--outline button--icon-left" do %>
+      <div class="button__row">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+        </svg>
+        <div>Back</div>
+      </div>
+    <% end %>
+  </div>
 
-<%= render "form", post: @post %>
+  <div class="form">
+    <%= form_with model: @post do |f| %>
+      <%= f.label :content, "Post Content", class: "form__label" %>
+      <%= f.text_field :content, placeholder: "Content", class: "form__input" %>
+      <div class="command-bar">
+        <span></span>
+        <%= f.button "Submit", type: :submit, class: "button button--primary" %>
+      </div>
+    <% end %>
+  </div>
+  <br>
 
-<br>
-
-<div>
-  <%= link_to "Back to posts", posts_path %>
-</div>
+<% end %>

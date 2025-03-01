@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   private
 
     def current_user
-      @current_user ||= User.find_by(id: session[:user_id])
+      @current_user = defined?(@current_user) ? @current_user : User.find_by(id: session[:user_id])
     end
 
     def simulate_slow_site
-      sleep 2
+      # sleep 2
     end
 end

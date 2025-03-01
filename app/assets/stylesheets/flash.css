@@ -1,0 +1,12 @@
+.flash {
+    width: 100%;
+    text-align: center;
+}
+
+.flash__notice {
+    color: var(--color-success);
+}
+
+.flash__alert {
+    color: var(--color-danger);
+}

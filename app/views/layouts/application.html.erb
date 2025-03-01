@@ -23,10 +23,7 @@
   </head>
 
   <body>
-    <nav class="top_nav">
-      <div class="top_nav__title">React Router Rails Example</div>
-      <div><%= profile_button(current_user) %></div>
-    </nav>
+    <%= render 'top_nav', current_user: %>
     <%= yield %>
   </body>
 </html>

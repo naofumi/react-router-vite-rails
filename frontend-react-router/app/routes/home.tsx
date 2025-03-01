@@ -28,7 +28,7 @@ export function Welcome() {
                 className="rounded-md bg-yellow-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-yellow-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600">
             See the Demo
           </Link>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <a href="https://github.com/naofumi/react-router-vite-rails" className="text-sm/6 font-semibold text-gray-900" target="_blank">
             See the code on GitHub <span
             aria-hidden="true">→</span>
           </a>

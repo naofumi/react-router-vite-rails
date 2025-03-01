@@ -1,5 +1,7 @@
 import { Form, Link, NavLink } from "react-router";
 import { useAuth } from "~/components/AuthProvider";
+import LinkPrimary from "~/components/LinkPrimary"
+import ButtonPrimary from "~/components/ButtonPrimary"
 
 export default function Nav() {
   const { currentUser } = useAuth();
@@ -40,22 +42,20 @@ export default function Nav() {
                 method="DELETE"
                 className="inline"
               >
-                <button
+                <ButtonPrimary
                   type="submit"
-                  className="py-1 px-2 text-white font-bold rounded bg-yellow-600 cursor-pointer hover:bg-yellow-500"
                 >
-                  Logout
-                </button>
+                  <div className="font-bold">Logout</div>
+                </ButtonPrimary>
               </Form>
             </div>
           ) : (
             <div>
-              <Link
+              <LinkPrimary
                 to={`/sessions/new`}
-                className="font-bold text-white p-2 rounded bg-yellow-600 hover:bg-yellow-500"
               >
-                Login
-              </Link>
+                <span className="text-bold">Login</span>
+              </LinkPrimary>
             </div>
           )}
         </div>

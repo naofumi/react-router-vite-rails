@@ -48,6 +48,6 @@ export default defineConfig({
         // rewrite rule will not be necessary.
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
-    }
-  }
+    },
+  },
 });

@@ -1,0 +1,29 @@
+.main {
+    padding: 96px 24px;  /* px-6 */
+}
+
+@media(min-width: 640px) {
+    .main {
+        padding: 128px 24px;
+    }
+}
+
+@media(min-width: 1024px) {
+    .main {
+        padding: 128px 32px;
+    }
+}
+
+.main__content {
+    max-width: 672px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main__title {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -.05em;
+    color: var(--color-gray-600);
+}

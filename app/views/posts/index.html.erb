@@ -1,16 +1,27 @@
-<p style="color: green"><%= notice %></p>
+<%= render "flash" %>
 
 <% content_for :title, "Posts" %>
 
-<h1>Posts</h1>
+<%= render 'main', title: "Posts" do %>
+  <div class="command-bar">
+    <span></span>
+    <%= new_post_button %>
+  </div>
+  <table class="table mt-12">
+    <thead>
+    <tr class="table__tr_head">
+      <th class="table__th">ID</th>
+      <th class="table__th">Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @posts.each do |post| %>
+      <tr class="table__tr_body">
+        <td class="table__td"><%= post.id %></td>
+        <td class="table__td text-left"><%= post.content %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
 
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New post", new_post_path %>

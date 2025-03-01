@@ -1,0 +1,55 @@
+.react-color {
+    color: var(--color-react);
+}
+
+.rails-color {
+    color: var(--color-rails);
+}
+
+.text-xl {
+    font-size: var(--text-xl);
+    line-height: calc(1.75/1.25);
+}
+
+.leading-0 {
+    line-height: 0;
+}
+
+.text-sm {
+    font-size: var(--text-sm);
+    line-height: calc(1.25/0.875);
+}
+
+.text-xs {
+    font-size: var(--text-xs);
+    line-height: calc(1.25/1.25);
+}
+
+.font-semibold {
+    font-weight: var(--font-semibold);
+}
+
+.font-bold {
+    font-weight: var(--font-bold);
+}
+
+.mr-2 {
+    margin-right: 8px;
+}
+
+.mt-12 {
+    margin-top: 48px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.size-6 {
+    height: 1.5rem;
+    width: 1.5rem;
+}

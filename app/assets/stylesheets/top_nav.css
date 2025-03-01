@@ -1,16 +1,32 @@
 .top_nav {
-    padding: 12px;
+    padding: 8px 16px;
+    border-bottom: solid 2px #e5e7eb;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #cccccc;
+    background-color: var(--color-white);
 }
 
-.top_nav__title {
-    font-size: 18px;
-    color: #FFFFFF;
-    font-weight: bolder;
+.top_nav__navlink {
+    color: var(--color-gray-600);
+    font-size: var(--text-xl);
+    &.active, &:hover {
+        color: var(--color-primary);
+    }
+}
+
+.top_nav__logo {
+    font-size: var(--text-xl);
+    :hover {
+        opacity: 0.6;
+    }
+}
+
+.top_nav__profile {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 }
 
 .top_nav__login_button {
@@ -28,9 +44,9 @@
 }
 
 .top_nav__email {
-    font-size: 18px;
-    color: #999999;
-    margin-right: 8px;
+    font-size: var(--text-xs);
+    color: var(--color-gray-600);
+    font-weight: var(--font-bold);
 }
 
 .top_nav__logout_button {

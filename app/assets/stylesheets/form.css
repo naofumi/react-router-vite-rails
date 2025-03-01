@@ -1,0 +1,24 @@
+.form {
+    margin: 16px auto;
+    max-width: 448px;
+}
+
+.form__label {
+    display: block;
+    text-align: left;
+    margin-bottom: 4px;
+    color: var(--color-gray-600);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+}
+
+.form__input {
+    padding: 4px;
+    border: solid 1px var(--color-gray-400);
+    border-radius: 0.25rem;
+    width: 100%;
+}
+
+.form__input:focus-visible {
+    outline-color: var(--color-primary);
+}
