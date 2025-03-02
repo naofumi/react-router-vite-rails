@@ -2,7 +2,7 @@
 * In this example application, the Ruby on Rails APIs endpoints are like
 * `GET /posts` or `GET /users` and do not have any prefixes like `/api*`.
 *
-* However, the port for the Vite development server (typically 5173 is different from
+* However, the port for the Vite development server (typically 5173) is different from
 * the Rails development server (typically 3000).
 * This means that the Vite server needs to distinguish
 * between the requests it should send to the Rails server on port 3000 and the

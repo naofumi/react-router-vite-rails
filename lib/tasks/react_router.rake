@@ -1,4 +1,6 @@
 namespace :react_router do
+  # For convenience, npm packages do not have to be explicitly installed.
+  # Installed will be automatically initiated by other tasks.
   desc "Install npm packages for the React Router app"
   task :npm_install do
     Dir.chdir("#{Dir.pwd}/frontend-react-router") do

@@ -5,6 +5,7 @@ This is an example web application proposing a way to integrate React Router Fra
 Consider using this if you wish to easily create a better React SPA integrated with Ruby on Rails.
 
 [Jump to how to build it](#how-it-is-built)
+[See this example app deployed using Kamal](https://rrrails.castle104.com)
 
 ## The problem
 
@@ -167,10 +168,9 @@ This ensures that assets use the browser cache effectively, whereas the HTML tem
 
 ### Deployment
 
-The React Router build step is integrated into the `bin/rails assets:precompile` task.
+Yarn installation and the React Router build step are integrated into the `bin/rails assets:precompile` task.
 Artifacts are stored inside the Ruby on Rails `public` folder.
 Note that we don't use Propshaft for the React Router build, and therefore artifacts are not saved into `app/assets/builds`.
 
 Your Dockerfile and CI setup can stay the same with the exception that you will need to install Node.js.
-If you want to learn how to do this, creating a new rails app configured with jsbundling is a great way
-to learn how to write a good Dockerfile that installs Node.js.
+See the `Dockerfile` for an example.

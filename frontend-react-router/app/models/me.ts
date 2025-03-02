@@ -8,6 +8,7 @@ type Me = {
 let meIsLoaded = false
 
 // Request /me only for the initial app load.
+// Later requests will use the cached value in the AuthContext.
 export async function getMeUnlessLoaded() {
   if (meIsLoaded) {
     return null

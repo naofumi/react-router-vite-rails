@@ -1,3 +1,10 @@
+# We have implemented a very simply but mostly sufficient login system to
+# illustrate how easy it is to add authentication when done on Rails,
+# thanks to the robust session framework that it provides.
+#
+# Obviously lacking is a password hashing mechanism which Rails provides out of the box
+# as the `use_secure_password` method on ActiveRecord.
+# We use simple clear text passwords here.
 class SessionsController < ApplicationController
   # GET /users/new
   def new
