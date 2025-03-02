@@ -1,10 +1,11 @@
 import type {Route} from "../../../.react-router/types/app/routes/posts/+types/home"
-import {Link, type MetaFunction} from "react-router"
+import {Form, Link, type MetaFunction} from "react-router"
 import {baseApiPath} from "~/utilities/proxy"
 import {useAuth} from "~/components/AuthProvider"
 import Main from "~/components/Main"
 import CommandBar from "~/components/CommandBar"
 import LinkPrimary from "~/components/LinkPrimary"
+import ButtonDangerOutline from "~/components/ButtonDangerOutline"
 
 export async function clientLoader({params}: Route.ClientLoaderArgs) {
   const res = await fetch(`${baseApiPath()}/posts`, {
@@ -47,7 +48,9 @@ export default function PostsHome({loaderData}: Route.ComponentProps) {
     <Main title="Posts">
       <div className="mt-8">
         <CommandBar>
-          <span></span>
+          <Form action="/fixtures" method="post">
+            <ButtonDangerOutline type="submit">Reset Data</ButtonDangerOutline>
+          </Form>
           <NewPostButton currentUser={currentUser} />
         </CommandBar>
       </div>

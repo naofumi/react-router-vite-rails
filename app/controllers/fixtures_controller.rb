@@ -2,6 +2,9 @@ class FixturesController < ApplicationController
   def create
     system "bin/rails db:fixtures:load RAILS_ENV=#{Rails.env}"
 
-    redirect_back_or_to posts_path
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.json { head :no_content, status: :created }
+    end
   end
 end

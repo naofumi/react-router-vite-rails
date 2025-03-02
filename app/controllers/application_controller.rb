@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
     end
 
     def simulate_slow_site
-      # sleep 2
+      sleep 2
     end
 end

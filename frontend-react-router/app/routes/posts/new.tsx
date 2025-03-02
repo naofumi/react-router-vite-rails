@@ -1,4 +1,4 @@
-import {Form} from "react-router"
+import {Form, redirect} from "react-router"
 import type {Route} from "../../../.react-router/types/app/routes/posts/+types/new"
 import {baseApiPath} from "~/utilities/proxy"
 import {getCSRFToken} from "~/utilities/csrf"
@@ -23,8 +23,8 @@ export async function clientAction({request}: Route.ClientActionArgs) {
     }
   )
 
-  const post: Post = await res.json()
-  return post
+  await res.json()
+  return redirect("/posts")
 }
 
 export default function PostNew({actionData}: Route.ComponentProps) {
@@ -45,7 +45,6 @@ export default function PostNew({actionData}: Route.ComponentProps) {
           <ButtonPrimary type="submit">Submit</ButtonPrimary>
         </CommandBar>
       </Form>
-      {actionData ? <p>{actionData.content} updated!</p> : null}
     </div>
   </Main>
 }
