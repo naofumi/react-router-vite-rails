@@ -28,6 +28,17 @@
     }
 }
 
+.button--danger--outline {
+    color: var(--color-danger);
+    background-color: var(--color-white);
+    border-color: var(--color-danger);
+
+    &:hover {
+        background-color: var(--color-white);
+        border-color: var(--color-danger-light);
+    }
+}
+
 .button--icon-left {
     padding: 4px 8px 4px 0;
 }

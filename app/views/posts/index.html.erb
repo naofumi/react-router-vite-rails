@@ -4,7 +4,8 @@
 
 <%= render 'main', title: "Posts" do %>
   <div class="command-bar">
-    <span></span>
+    <%= button_to "Reset Data", fixtures_path, method: :post,
+                  class: "button button--danger--outline" %>
     <%= new_post_button %>
   </div>
   <table class="table mt-12">

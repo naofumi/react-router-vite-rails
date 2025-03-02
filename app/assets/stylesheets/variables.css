@@ -10,6 +10,7 @@
     --color-react: #155dfc;
     --color-success: oklch(0.627 0.194 149.214);
     --color-danger: oklch(0.577 0.245 27.325);
+    --color-danger-light: #fb2c36;
 
     /* Font sizes, spacing, borders */
     --text-xs: 0.75rem;
@@ -24,4 +25,3 @@
     --padding-small: 8px;
     --border-radius-small: 8px;
 }
-
