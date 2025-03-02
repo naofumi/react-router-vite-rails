@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "posts#index"
+  # root "posts#index"
+  root to: redirect("/react-router/")
 
   # When we use React Router inside a subdirectory, it works better if we
   # use a trailing slash for the root path.
