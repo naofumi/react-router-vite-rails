@@ -5,11 +5,11 @@
 <%= render "main", title: "Login" do %>
   <%= form_with url: sessions_path, method: :post, class: "form" do |f| %>
     <div class="form__group">
-      <%= f.label :email, class: "form__label" %>
+      <%= f.label :email, "Email (sazae@example.com)", class: "form__label" %>
       <%= f.text_field :email, class: "form__input" %>
     </div>
     <div class="form__group">
-      <%= f.label :clear_passwords, class: "form__label" %>
+      <%= f.label :clear_passwords, "Password (hogehoge)", class: "form__label" %>
       <%= f.password_field :clear_password, class: "form__input" %>
     </div>
     <div class="form__group">

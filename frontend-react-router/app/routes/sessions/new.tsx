@@ -55,7 +55,7 @@ export default function SessionsCreate({ actionData }: Route.ComponentProps) {
         <Form method="post">
           <div className="my-8">
             <Label htmlFor="email">
-              Email
+              Email (sazae@example.com)
             </Label>
             <Input
               type="text"
@@ -66,7 +66,7 @@ export default function SessionsCreate({ actionData }: Route.ComponentProps) {
             />
           </div>
           <div>
-            <Label htmlFor="clear_password">Clear Password</Label>
+            <Label htmlFor="clear_password">Password (hogehoge)</Label>
             <Input
               type="password"
               id="clear_password"
