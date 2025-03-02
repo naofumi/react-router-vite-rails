@@ -19,6 +19,10 @@
     width: 100%;
 }
 
+.form__group {
+    margin: 16px 0;
+}
+
 .form__input:focus-visible {
     outline-color: var(--color-primary);
 }

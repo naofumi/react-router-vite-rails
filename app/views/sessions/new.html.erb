@@ -1,18 +1,19 @@
-<div class="login_form">
-  <h1 class="login_form__header">Login</h1>
-  <%= form_with url: sessions_path, method: :post do |f| %>
-    <p style="color: red"><%= flash[:alert] %></p>
+<%= render "flash" %>
 
-    <div class="login_form__group">
-      <%= f.label :email, class: "login_form__label" %>
-      <%= f.text_field :email, class: "login_form__input" %>
+<%= content_for :title, "Login" %>
+
+<%= render "main", title: "Login" do %>
+  <%= form_with url: sessions_path, method: :post, class: "form" do |f| %>
+    <div class="form__group">
+      <%= f.label :email, class: "form__label" %>
+      <%= f.text_field :email, class: "form__input" %>
     </div>
-    <div class="login_form__group">
-      <%= f.label :clear_passwords, class: "login_form__label" %>
-      <%= f.password_field :clear_password, class: "login_form__input" %>
+    <div class="form__group">
+      <%= f.label :clear_passwords, class: "form__label" %>
+      <%= f.password_field :clear_password, class: "form__input" %>
     </div>
-    <div class="login_form__controls">
-      <%= f.submit "Login", class: "login_form__button--submit" %>
+    <div class="form__group">
+      <%= f.submit "Login", class: "button button--primary font-bold" %>
     </div>
   <% end %>
-</div>
+<% end %>
