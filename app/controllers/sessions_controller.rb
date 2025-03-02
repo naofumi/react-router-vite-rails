@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
   # POST /users or /users.json
   def create
-    @user = User.find_by(email: params[:email], clear_password: params[:clear_password])
+    @user = User.authenticated_user(email: params[:email], clear_password: params[:clear_password])
     respond_to do |format|
       if @user
         session.clear
