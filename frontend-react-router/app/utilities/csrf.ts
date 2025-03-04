@@ -21,7 +21,8 @@
 *    and use its value to send in your fetch request headers.
 * 3. On receiving the request, Rails will validate that the
 *    'X-CSRF-Token' header value matches what was sent via the cookie.
-* 4. Note that you only need to do this for non-GET requests.
+* 4. Note that you only need to do this for non-GET requests assuming that
+*    you are following best practices and not mutating data in GET requests.
 *
 * Your code should look like this.
 *    const res = await fetch(`${baseApiPath()}/posts`, {

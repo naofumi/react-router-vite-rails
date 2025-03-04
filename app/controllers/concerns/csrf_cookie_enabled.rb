@@ -1,5 +1,6 @@
-# This allows you to use Ruby on Rails' robust CSRF protection
-# in your React Router app.
+# This concern sets the CSRF token inside the "X-CSRF-Token" cookie,
+# allowing you to easily use the robust CSRF protection that Ruby on Rails provides
+# inside your React Router app.
 #
 # Refer to `frontend-react-router/app/utilities/csrf.ts` to see
 # how the client side is implemented.

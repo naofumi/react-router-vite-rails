@@ -2,9 +2,13 @@
 # illustrate how easy it is to add authentication when done on Rails,
 # thanks to the robust session framework that it provides.
 #
-# Obviously lacking is a password hashing mechanism which Rails provides out of the box
-# as the `use_secure_password` method on ActiveRecord.
-# We use simple clear text passwords here.
+# To focus on the simplicity of authentication, I have opted to use passwords in clear text.
+# This is a bad idea for production, but it emphasizes that authentication is merely checking
+# the provided credentials and then handing them the keys (via the session).
+#
+# To use this in production, use the `has_secure_password` method that ActiveRecord provides
+# to check the validity of the email - password combination.
+#
 class SessionsController < ApplicationController
   # GET /users/new
   def new

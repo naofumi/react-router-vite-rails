@@ -24,8 +24,8 @@ export default {
     await rename("build/client", "../public/react-router")
     await rm("build", { recursive: true, force: true })
   },
-  // In the above, we decided to serve the React Router app from "/react-router/".
+  // In the above, we have decided to serve the React Router app from "/react-router/".
   // The basename options tell React Router to manage this when generating
-  // link tags, for example.
+  // Link tags, for example.
   basename: "/react-router/"
 } satisfies Config;

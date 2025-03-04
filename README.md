@@ -1,8 +1,9 @@
 # React-Router-Vite-Rails
 
-This is an example web application proposing a way to integrate React Router Framework/SPA mode and Ruby on Rails.
+This is an example web application that proposes a way to integrate React Router Framework/SPA mode and Ruby on Rails.
 
-Consider using this if you wish to easily create a better React SPA integrated with Ruby on Rails.
+Consider using the methods in this example
+to explore a simple way to create a better React SPA integration for Ruby on Rails.
 
 [Jump to how to build it](#how-it-is-built)
 [See this example app deployed using Kamal](https://rrrails.castle104.com)
@@ -10,34 +11,38 @@ Consider using this if you wish to easily create a better React SPA integrated w
 ## The problem
 
 Historically,
-integrating React with Ruby on Rails was done by creating a dedicated Rails route and ERB file as the bootstrap file
+integrating React with Ruby on Rails was done by creating a dedicated Rails route from which you served a static ERB file as the bootstrap file
 (the first HTML file that the browser loads).
 
-You would use `javascript_include_tag` (jsbundling or sprockets)
-or `javascript_pack_tag` (webpacker) to load the JavaScript bundle that contains your React application.
-If you wish to use Vite,
+Inside this ERB file, you would typically use `javascript_include_tag` ([jsbundling](https://github.com/rails/jsbundling-rails) or [sprockets](https://github.com/rails/sprockets))
+or `javascript_pack_tag` ([webpacker](https://github.com/rails/webpacker)) to load the JavaScript bundle that contained your React application.
+If you wished to use Vite,
 you might use [Vite Rails](https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails)
-and then use  the `vite_javascript_tag`.
+and then use the corresponding `vite_javascript_tag` in exactly the same way.
 
-However, the traditional approach treats React as a library.
-You are responsible for installing the client-side router, implementing code-splitting, avoiding fetch waterfalls, etc.
-Although this approach may have been adequate in the past, the React team has recommended against it and suggested that [even for SPAs, developers should use a framework](https://react.dev/blog/2025/02/14/sunsetting-create-react-app).
+However, this traditional approach treats React as a library.
+You are responsible for installing the client-side router,
+implementing code-splitting, avoiding fetch waterfalls, etc.,
+all of which have significant implications for performance.
+Although this approach may have been adequate in the past,
+the React team has recommended against it and suggested that [even if you are only interested in a SPA,
+developers should use a framework](https://react.dev/blog/2025/02/14/sunsetting-create-react-app).
 
-With this in mind, I propose a solution that allows you to easily integrate an SPA framework with Ruby on Rails.
+With this in mind, I propose a simple solution that allows you to integrate an SPA framework with Ruby on Rails.
 
 ## The proposal
 
 The current proposal uses React Router version 7 in SPA/Framework mode.
 
 * Instead of creating a bootstrap file (the HTML file that is initially loaded by the browser) in ERB, we use the one that React Router builds in SPA mode (using SSG).
-* We send the static bootstrap file through Rails controllers instead of serving it in the `public` directory. This allows us to set caching headers separately and manage cookies efficiently, simplifying authentication and CSRF protection.
+* We send this static bootstrap file to the browser through Rails controllers instead of serving it in the `public` directory. This allows us to set caching headers separately and manage cookies efficiently, simplifying authentication and CSRF protection.
 
 ### Compared to the traditional method
 
 * Compared to the traditional approach where React is treated as a library, an SPA framework will integrate a client-side routing library.
-* It will also give you automatic code-splitting together with data-fetching parallelization and other benefits.
+* It will also give you automatic code-splitting together with data-fetching parallelization and other benefits that are important for performance and UX.
 
-Putting it simply, it should make it easier to create a better SPA.
+Putting it simply, the current method should make it easier to create a better SPA.
 
 ### Compared to hosting static files on a separate server
 
@@ -50,23 +55,26 @@ Putting it simply, it should make it easier to create a better SPA.
 * Hosting a separate Next.js SSR server will typically require you to re-implement authentication inside Next.js. The current approach can simply use Rails' authentication as is.
 * With the current approach, cross-site requests and CORS will no longer be a concern.
 
-Note that you can use Next.js as an SPA
-and [use static export](https://nextjs.org/docs/app/building-your-application/upgrading/single-page-applications#static-export-optional).
-This will also allow you
-to host static files in the Ruby on Rails `public` folder although there are difficulties with dynamic routes. 
+Note that you can use Next.js [with static exports](https://nextjs.org/docs/app/building-your-application/upgrading/single-page-applications#static-export-optional)
+to generate files that can be statically hosted as an SPA.
+You could put these on a Ruby on Rails `public` folder to achieve simplicity that is similar to the current approach.
+However, Next.js static exports have difficulties, particularly with dynamic routes,
+which make it a less straightforward than React Router v7 in SPA mode.
+Hence, my choice of React Router v7 instead.
 
 ## Building the Integration
 
-I have heavily added comments to each file. Please look through these to see how the application is configured.
+I have heavily added comments to each file in this repository.
+Please read these to understand how the application is configured.
 
 The step-by-step setup is as follows.
 
 ### Install Ruby on Rails
 
 Just run `rails new` to set up the Ruby on Rails server.
-A no-build setup will suffice since Rails is not responsible for building the React application.
-If you want, you can use jsbundling for additional JavaScript.
-Note that any build using jsbundling will be completely independent of the React app.
+The default, no-build setup will suffice since Rails is not responsible for building the React application.
+If you want, you can use [jsbundling](https://github.com/rails/jsbundling-rails) for additional JavaScript.
+Note that the React Router app will be completely independent of jsbundling.
 
 ```shell
 rails new [react-router-vite-rails]
@@ -74,7 +82,8 @@ rails new [react-router-vite-rails]
 
 \[react-router-vite-rails] is the name of the project.
 
-Prepare a route and a controller action to serve the bootstrap HTML template. View the following files in the current directory for guidance.
+Prepare a route and a controller action to serve the bootstrap HTML template.
+View the comments in the following files for guidance.
 
 * `config/routes.rb`
 * `app/controllers/react_controller.rb` 
@@ -99,7 +108,7 @@ npx create-react-router@latest [frontend-react-router]
 
 Configure the following files to run in SPA mode.
 This will set up the development server proxy, and move files to Rails' `public` directory on build.
-Also, set up the Ruby rake tasks for running the development server and building assets.
+You will additionally need to set up the Ruby rake tasks for running the development server and building assets.
 The comments in the following files inside the current repository should guide you.
 
 * `frontend-react-router/react-router.config.ts`
@@ -135,7 +144,8 @@ The example application simulates a slow server by adding a 2-second delay to al
 This gives us a more realistic experience similar to what users might see in the real world.
 Note that routes that don't need server connections will be instantaneous.
 
-Any fast website will have a good UI/UX, even with ancient technology, and we need a slower one to demonstrate the benefits of using an SPA framework.
+A fast server and a good internet connection will mask any deficiencies of a poorly built SPA.
+To understand the benefits of using an SPA framework, I believe that you need to simulate real-world conditions with a slower network.
 
 ### Authentication
 
@@ -156,7 +166,8 @@ The server sends the CSRF token in a cookie, which can be added to the header of
 
 Note that because we serve the bootstrap HTML template from a controller action,
 the React application is guaranteed to have access to the CSRF token from the first load onwards.
-This is convenient when the first page contains a form.
+This is convenient when the first loaded page contains a form
+and needs a valid CSRF token from the onset to allow immediate submission.
 
 ### Cache Control
 
@@ -164,13 +175,19 @@ The bootstrap HTML template is served from a Rails controller action.
 As a result, the default Cache-Control header is set to the same value as other ERB files – `Cache-Control: max-age=0, private, must-revalidate`.
 On the other hand, assets are served from the `public` folder and have `Cache-Control: public, max-age=172800`.
 
-This ensures that assets use the browser cache effectively, whereas the HTML template is always fresh and users get the most recent version of the app.
+This ensures that assets served from `public` use the browser cache effectively,
+whereas the HTML template served from the Rails controller is always fresh and always provides the most recent version of the app.
+
+Note that assets served from the `public` folder will have hash-digests to bust caching.
+However, since the bootstrap HTML template is the first file to be loaded,
+it always has to have the same URL, and this precludes the use of hash-digests on this one.
+Therefore, we need separate caching configurations for each.
 
 ### Deployment
 
-Yarn installation and the React Router build step are integrated into the `bin/rails assets:precompile` task.
+NPM installation and the React Router build step are integrated into the `bin/rails assets:precompile` task.
 Artifacts are stored inside the Ruby on Rails `public` folder.
-Note that we don't use Propshaft for the React Router build, and therefore artifacts are not saved into `app/assets/builds`.
 
-Your Dockerfile and CI setup can stay the same with the exception that you will need to install Node.js.
-See the `Dockerfile` for an example.
+Since we tap into the asset pipeline commands,
+your Dockerfile and CI setup can stay the same with the exception that you may need to install Node.js.
+See the `Dockerfile` for an example of this.
