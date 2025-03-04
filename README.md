@@ -1,12 +1,12 @@
 # React-Router-Vite-Rails
 
-This is an example web application that proposes a way to integrate React Router Framework/SPA mode and Ruby on Rails.
+This is an example web application that proposes a way to integrate React Router Framework/SPA mode with Ruby on Rails.
 
 Consider using the methods in this example
-to explore a simple way to create a better React SPA integration for Ruby on Rails.
+to explore a simple way to create a better React SPA – Rails integration.
 
-[Jump to how to build it](#how-it-is-built)
-[See this example app deployed using Kamal](https://rrrails.castle104.com)
+- [Jump to read how to build it](#how-it-is-built)
+- [See this example app deployed using Kamal](https://rrrails.castle104.com)
 
 ## The problem
 
@@ -59,8 +59,8 @@ Note that you can use Next.js [with static exports](https://nextjs.org/docs/app/
 to generate files that can be statically hosted as an SPA.
 You could put these on a Ruby on Rails `public` folder to achieve simplicity that is similar to the current approach.
 However, Next.js static exports have difficulties, particularly with dynamic routes,
-which make it a less straightforward than React Router v7 in SPA mode.
-Hence, my choice of React Router v7 instead.
+which make it less straightforward than React Router v7 in SPA mode.
+Hence, my choice of React Router v7 for this example.
 
 ## Building the Integration
 
@@ -72,7 +72,7 @@ The step-by-step setup is as follows.
 ### Install Ruby on Rails
 
 Just run `rails new` to set up the Ruby on Rails server.
-The default, no-build setup will suffice since Rails is not responsible for building the React application.
+The default, no-build setup will suffice since Rails is not responsible for building the React Router application.
 If you want, you can use [jsbundling](https://github.com/rails/jsbundling-rails) for additional JavaScript.
 Note that the React Router app will be completely independent of jsbundling.
 
@@ -149,12 +149,14 @@ To understand the benefits of using an SPA framework, I believe that you need to
 
 ### Authentication
 
-Running React as a static asset on a Ruby on Rails application makes authentication simple. To illustrate this,
+Running React as a static asset on a Ruby on Rails application makes it possible to share cookies,
+and this greatly simplifies authentication.
+To illustrate this,
 I have created a simple session-based authentication system in Rails and have used it from the React application.
 
 Note that the ERB and the React pages will share authentication.
-This makes it particularly easy to mix React and ERB pages in the same application 
-if you are gradually transitioning from a React-based site to Hotwire, for example.
+This makes it particularly easy to mix React and ERB pages in the same application. 
+This helps a lot if you are gradually transitioning from a React-based site to Hotwire, for example.
 
 ### CSRF protection
 
