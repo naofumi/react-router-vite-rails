@@ -4,8 +4,8 @@ import {baseApiPath} from "~/utilities/proxy"
 import {useAuth} from "~/components/AuthProvider"
 import Main from "~/components/Main"
 import CommandBar from "~/components/CommandBar"
-import LinkPrimary from "~/components/LinkPrimary"
 import ButtonDangerOutline from "~/components/ButtonDangerOutline"
+import { NewPostButton } from "./components/NewPostButton"
 
 export async function clientLoader({params}: Route.ClientLoaderArgs) {
   const res = await fetch(`${baseApiPath()}/posts`, {
@@ -16,22 +16,6 @@ export async function clientLoader({params}: Route.ClientLoaderArgs) {
   const posts: Post[] = await res.json()
 
   return {posts}
-}
-
-function NewPostButton({
-  currentUser,
-}: {
-  currentUser: ReturnType<typeof useAuth>["currentUser"];
-}) {
-  return (
-    <>
-      {currentUser ? (
-        <LinkPrimary to={`/posts/new`}>New Post</LinkPrimary>
-      ) : (
-        <LinkPrimary to={`/sessions/new`}>Login to create New Post</LinkPrimary>
-      )}
-    </>
-  );
 }
 
 export function meta() {
