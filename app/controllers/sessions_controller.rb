@@ -10,11 +10,11 @@
 # to check the validity of the email - password combination.
 #
 class SessionsController < ApplicationController
-  # GET /users/new
+  # GET /sessions/new
   def new
   end
 
-  # POST /users or /users.json
+  # POST /sessions or /sessions.json
   def create
     @user = User.authenticated_user(email: params[:email], clear_password: params[:clear_password])
     respond_to do |format|

@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   private
 
     def current_user
-      @current_user = defined?(@current_user) ? @current_user : User.find_by(id: session[:user_id])
+      @session_authenticator ||= SessionAuthentication.new(session:)
+      @session_authenticator.current_resource
     end
 
     def simulate_slow_site
