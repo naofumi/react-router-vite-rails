@@ -1,5 +1,6 @@
 import {Link} from "react-router";
 import type {Route} from "./+types/home";
+import TechnologyBanner from "~/components/TechnologyBanner"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,7 +14,8 @@ export default function Home() {
 }
 
 export function Welcome() {
-  return (
+  return <>
+    <TechnologyBanner />
     <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-4xl font-semibold tracking-tight text-balance text-blue-600 sm:text-5xl">
@@ -79,5 +81,5 @@ export function Welcome() {
         </p>
       </div>
     </div>
-  );
+  </>
 }

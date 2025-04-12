@@ -1,0 +1,15 @@
+.technology_banner--erb {
+    background-color: red;
+    font-size: 1.125rem;
+    color: white;
+    opacity: 0.7;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 24px;
+    width: 192px;
+    transform: rotate(-45deg);
+    position: fixed;
+    top: 32px;
+    left: -48px;
+}

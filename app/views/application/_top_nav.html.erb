@@ -10,7 +10,11 @@
     </div>
   <% end %>
   <div>
-    <%= link_to "Posts", posts_path,
+    <%= link_to "React", "/react-router/posts",
+                class: class_names("top_nav__navlink text-gray-600 mr-2",  "active": current_page?(posts_path)) %>
+  </div>
+  <div>
+    <%= link_to "ERB", posts_path,
                 class: class_names("top_nav__navlink text-gray-600 mr-2",  "active": current_page?(posts_path)) %>
   </div>
   <div>

@@ -27,6 +27,12 @@ export default function Nav() {
           >
             Posts
           </NavLink>
+          <a
+            href="/posts"
+            className="top-nav__navlink text-xl text-gray-600 hover:text-yellow-600 mr-2"
+          >
+            ERB
+          </a>
           <NavLink
             to="/privates"
             className="top-nav__navlink text-xl text-gray-600 hover:text-yellow-600"
