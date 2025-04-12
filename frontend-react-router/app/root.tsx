@@ -19,8 +19,6 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({children}: { children: React.ReactNode }) {
-  const navigation = useNavigation();
-  const isNavigating = Boolean(navigation.location);
 
   return (
     <html lang="en">
@@ -36,7 +34,6 @@ export function Layout({children}: { children: React.ReactNode }) {
     </AuthProvider>
     <ScrollRestoration/>
     <Scripts/>
-    {isNavigating && <HydrateFallback/>}
     </body>
     </html>
   );
@@ -49,6 +46,7 @@ export function HydrateFallback() {
 }
 
 export default function App() {
+
   return (
     <Outlet/>
   );
