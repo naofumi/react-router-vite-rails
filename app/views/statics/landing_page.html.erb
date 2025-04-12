@@ -1,0 +1,30 @@
+<%= render 'technology_banner' %>
+<div class="landing-page">
+  <div class="container--landing-page">
+    <main class="main--landing-page">
+      <h2 class="title--landing-page title--landing-page--react">
+        React Router SPA/Framework mode
+      </h2>
+      <div class="title__ampersand--landing-page">&</div>
+      <h2 class="title--landing-page title--landing-page--erb">
+        Ruby on Rails
+      </h2>
+      <div class="link-box--landing-page my-10 flex items-center">
+        <%= link_to "See the Demo", "/react-router/posts",
+                    data: {turbo: false},
+                    class: "link-box__btn--landing-page" %>
+        <%= link_to "https://github.com/naofumi/react-router-vite-rails", class: "link-box__link--landing-page" do %>
+          See the code on GitHub <span aria-hidden="true">→</span>
+        <% end %>
+        <%= link_to "#", class: "link-box__link--landing-page", target: "_blank" do %>
+          Read the blog post <span aria-hidden="true">→</span>
+        <% end %>
+
+      </div>
+      <p class="p--landing-page">
+        This demo application shows an example of using the react_router_rails_spa gem. See the README on GitHub for
+        more details.
+      </p>
+    </main>
+  </div>
+</div>

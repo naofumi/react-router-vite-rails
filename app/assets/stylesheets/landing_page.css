@@ -1,0 +1,86 @@
+.landing-page {
+    .container--landing-page {
+        padding: 96px 24px;
+        @media (min-width: 640px) {
+            padding: 128px 24px;
+        }
+        @media (min-width: 1048px) {
+            padding: 128px 32px;
+        }
+    }
+
+    .main--landing-page {
+    /*    mx-auto max-w-2xl text-center*/
+        margin: 0 auto;
+        max-width: 672px;
+        text-align: center;
+    }
+
+    .title--landing-page {
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+        @media(min-width: 640px) {
+            font-size: 48px;
+        }
+    }
+
+    .title--landing-page--react {
+        color: oklch(0.546 0.245 262.881);
+    }
+
+    .title--landing-page--erb {
+        color: oklch(0.577 0.245 27.325);
+    }
+
+    .title__ampersand--landing-page {
+        margin: 16px 0;
+        font-size: 30px;
+        color: oklch(0.551 0.027 264.364);
+    }
+
+    .link-box--landing-page {
+        margin: 40px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 24px;
+    }
+
+    .link-box__btn--landing-page {
+        border-radius: 6px;
+        background-color: oklch(0.681 0.162 75.834);
+        padding: 10px 14px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: white;
+        &:hover {
+            background-color: oklch(0.795 0.184 86.047)
+        }
+        &:focus-visible {
+            outline-style: solid;
+            outline-width: 2px;
+            outline-offset: 2px;
+            outline-color: oklch(0.681 0.162 75.834);
+        }
+    }
+
+    .link-box__link--landing-page {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: oklch(0.21 0.034 264.665);
+    }
+
+    .p--landing-page {
+    /*    hyphens-auto text-justify mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-600*/
+        hyphens: auto;
+        text-align: justify;
+        margin-top: 24px;
+        margin-inline: auto;
+        max-width: 576px;
+        font-size: 1.125rem;
+        text-wrap: pretty;
+        color: oklch(0.446 0.03 256.802);
+    }
+}

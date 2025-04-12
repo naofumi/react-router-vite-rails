@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root to: redirect("/react-router/")
+  root "statics#landing_page"
 
   # When we use React Router inside a subdirectory, it works better if we
   # use a trailing slash for the root path.

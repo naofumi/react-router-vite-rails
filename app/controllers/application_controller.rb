@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
     end
 
     def simulate_slow_site
-      sleep 2 unless Rails.env.test?
+      # sleep 2 unless Rails.env.test?
     end
 end
