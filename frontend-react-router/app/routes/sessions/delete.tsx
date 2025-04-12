@@ -24,11 +24,11 @@ export async function clientAction({request, params}: Route.ClientActionArgs) {
 }
 
 export default function SessionDelete({actionData}: Route.ComponentProps) {
-  const {setCurrentUser} = useAuth();
+  const {resetMe} = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    setCurrentUser(null)
+    resetMe()
     navigate("/")
-  }, [setCurrentUser, navigate]);
+  }, [resetMe, navigate]);
 }

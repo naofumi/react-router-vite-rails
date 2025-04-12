@@ -40,11 +40,11 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 export default function SessionsCreate({ actionData }: Route.ComponentProps) {
   const navigate = useNavigate();
   const error = actionData?.error || "";
-  const { setCurrentUser } = useAuth();
+  const { resetMe } = useAuth();
 
   useEffect(() => {
     if (actionData?.data) {
-      setCurrentUser(actionData.data);
+      resetMe();
       navigate("/posts");
     }
   }, [actionData?.data]);

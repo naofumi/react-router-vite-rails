@@ -2,9 +2,9 @@ import {useAuth} from "~/components/AuthProvider"
 import Main from "~/components/Main"
 
 export default function PrivatesHome() {
-  const { currentUser } = useAuth()
+  const { me } = useAuth()
 
-  if (!currentUser) return <div className="my-4 mx-auto max-w-md">
+  if (!me) return <div className="my-4 mx-auto max-w-md">
     <p>Unauthorized users cannot access this page.</p>
     <p>Please login</p>
   </div>

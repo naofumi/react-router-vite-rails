@@ -25,7 +25,7 @@ export function meta() {
 }
 
 export default function PostsHome({loaderData}: Route.ComponentProps) {
-  const {currentUser} = useAuth()
+  const {me} = useAuth()
   const {posts} = loaderData
 
   return (
@@ -35,7 +35,7 @@ export default function PostsHome({loaderData}: Route.ComponentProps) {
           <Form action="/fixtures" method="post">
             <ButtonDangerOutline type="submit">Reset Data</ButtonDangerOutline>
           </Form>
-          <NewPostButton currentUser={currentUser} />
+          <NewPostButton me={me} />
         </CommandBar>
       </div>
       <table className="w-full mt-12">

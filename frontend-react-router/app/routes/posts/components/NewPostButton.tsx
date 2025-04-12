@@ -2,13 +2,13 @@ import type { useAuth } from "~/components/AuthProvider";
 import LinkPrimary from "~/components/LinkPrimary";
 
 export function NewPostButton({
-  currentUser,
+  me,
 }: {
-  currentUser: ReturnType<typeof useAuth>["currentUser"];
+  me: ReturnType<typeof useAuth>["me"];
 }) {
   return (
     <>
-      {currentUser ? (
+      {me ? (
         <LinkPrimary to={`/posts/new`}>New Post</LinkPrimary>
       ) : (
         <LinkPrimary to={`/sessions/new`}>Login to create New Post</LinkPrimary>

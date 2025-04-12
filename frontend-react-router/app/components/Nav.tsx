@@ -2,9 +2,10 @@ import { Form, Link, NavLink } from "react-router";
 import { useAuth } from "~/components/AuthProvider";
 import LinkPrimary from "~/components/LinkPrimary"
 import ButtonPrimary from "~/components/ButtonPrimary"
+import {useEffect} from "react"
 
 export default function Nav() {
-  const { currentUser } = useAuth();
+  const { me } = useAuth();
 
   return (
     <>
@@ -34,11 +35,11 @@ export default function Nav() {
           </NavLink>
         </div>
         <div>
-          {currentUser ? (
+          {me ? (
             <div className="flex flex-col items-end">
-              <div className="font-bold text-xs">{currentUser.email}</div>
+              <div className="font-bold text-xs">{me.email}</div>
               <Form
-                action={`sessions/${currentUser.id}`}
+                action={`sessions/${me.id}`}
                 method="DELETE"
                 className="inline"
               >

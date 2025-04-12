@@ -5,30 +5,39 @@ import {
   useEffect,
   useState,
 } from "react";
-import { baseApiPath } from "~/utilities/proxy";
-
-type AuthContextUserType = {
-  id: number;
-  email: string;
-};
+import {getMe, type Me} from "~/models/me"
 
 type AuthContextType = {
-  currentUser: AuthContextUserType | null;
-  setCurrentUser: (user: AuthContextUserType | null) => void;
+  me: Me | null;
+  resetMe: () => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
-  currentUser: null,
-  setCurrentUser: () => {},
+  me: null,
+  resetMe: () => {},
 } as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [currentUser, setCurrentUser] = useState<AuthContextUserType | null>(
-    null
-  );
+  const [me, setMe] = useState<Me | null>(null);
+  const [meLoaded, setMeLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (meLoaded) {
+      return
+    }
+    getMe().then(me => {
+      setMe(me)
+      setMeLoaded(true)
+    })
+  }, [meLoaded, setMe, setMeLoaded])
+
+  const resetMe = () => {
+    setMeLoaded(false)
+    setMe(null)
+  }
 
   return (
-    <AuthContext.Provider value={{ currentUser, setCurrentUser }}>
+    <AuthContext.Provider value={{ me, resetMe }}>
       {children}
     </AuthContext.Provider>
   );
