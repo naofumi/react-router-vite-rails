@@ -5,47 +5,48 @@ This is an example web application that is built using the react_router_rails_sp
 - [Jump to read how to build it](#how-it-is-built)
 - [See this example app deployed using Kamal](https://rrrails.castle104.com)
 
+## How to Use
+
+* Download the GitHub respository.
+* Install dependencies with `bundle install`
+* Start the Ruby on Rails application with `bin/dev`
+* Build the React application with `bin/rails react:preview`
+* Access `http://localhost:3000`
+
+If you want to use the React Router development server with HMR, instead of building the React application, run the development server with `bin/rails react:dev`.
+Then access the page with ``http://localhost:5173/react`.
+Note that you will not be able to switch between ERB and React pages with the React Router development server.
+
 ## Features
 
-### Artificial delay for all server routes
+### Integrated Client-side Routing
 
-The example application simulates a slow server by adding a 2-second delay to all server routes.
-This gives us a more realistic experience similar to what users might see in the real world.
-Note that routes that don't need server connections will be instantaneous.
+The react_router_rails_spa gem uses React Router in SPA framework mode and includes client-side routing.
+It also integrates loader-based fetching.
+Loader-based fetching allows parallel loading of code-split fragments and page data, ensuring that code-splitting does not cause decrease performance due to request waterfalls.
 
-With a fast server and a fast network, even very poorly built applications will give you a very smooth and snappy application.
-To understand the benefits of using an SPA framework, you need to simulate real-world conditions with a slower network and server.
-This is why we built in the delay.
+### Automatic Code-splitting
 
-### Authentication
+When you build the React Router application using `bin/rails react:build`, you can see how the whole application is deployed inside the Rails' `public` folder. 
+You can also see how the application has been split into multiple files.
+Note that each route has been automatically code-split, using information from the integrated router and without manual configuration.
+This will ensure that even when you application grows to hundreds of pages, the initial page load will remain fast.
 
-Running React as a static asset on a Ruby on Rails application makes it possible to share cookies,
-and this greatly simplifies authentication.
-To illustrate this,
-I have provided a simple session-based authentication system in Rails and have used it from the React application.
-
-* The ERB and the React pages share the same authentication. Logging in on one side automatically authenticates you on the other.
-* This makes it particularly easy to have both ERB and React pages seemlessly co-exist on the same site.
-
-### CSRF protection
-
-Ruby on Rails provides robust CSRF protection using tokens.
-This is very important when using session cookies for authentication.
-
-The example application uses the [Cookie-to-header token](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token) approach.
-The server sends the CSRF token in a cookie, which can be added to the header of any non-GET request.
-
-Note that because we serve the bootstrap HTML template from a controller action,
-the React application is guaranteed to have access to the CSRF token from the first load onwards.
-This is convenient when the first loaded page contains a form
-and needs a valid CSRF token from the onset to allow immediate submission.
-
-### Deployment
+### Ease of Deployment
 
 NPM package installation and the React Router build step are integrated into the `bin/rails assets:precompile` task.
 Artifacts are stored inside the Ruby on Rails `public` folder.
 
-Since we tap into the asset pipeline commands,
-your CI/CD setup will not need any additional configuration.
+This means that production server configuration and CD scripts do not need any special configuration.
+We deploy using Kamal and you can confirm that there are not special build steps in the `Dockerfile`.
 
-Note that if your CI/CD setup does not install Node, you need to add this.
+### Integration with ERB views
+
+This demo includes ERB views and a simple authentication implementation.
+Note how you can easily switch between ERB and React views and that they share authentication.
+
+### SEO-optimized Pages with ERB
+
+ALthough you may not need SEO for the React pages, you still may want your landing page and some marketing pages to be SEO-friendly.
+
+In this application, I have create the top page with ERB so that it will render HTML server-side and can be optimized for SEO.
