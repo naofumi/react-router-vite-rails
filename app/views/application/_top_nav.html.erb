@@ -11,6 +11,7 @@
   <% end %>
   <div>
     <%= link_to "React", "/react-router/posts",
+                data: {turbo: false},
                 class: class_names("top_nav__navlink text-gray-600 mr-2",  "active": current_page?(posts_path)) %>
   </div>
   <div>
