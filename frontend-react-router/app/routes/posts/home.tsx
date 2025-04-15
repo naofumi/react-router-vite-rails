@@ -1,12 +1,13 @@
 import type {Route} from "../../../.react-router/types/app/routes/posts/+types/home"
-import {Form, Link, type MetaFunction} from "react-router"
+import {Form, Link, type MetaFunction, useOutletContext} from "react-router"
 import {baseApiPath} from "~/utilities/proxy"
-import {useAuth} from "~/components/AuthProvider"
 import Main from "~/components/Main"
 import CommandBar from "~/components/CommandBar"
 import ButtonDangerOutline from "~/components/ButtonDangerOutline"
 import { NewPostButton } from "./components/NewPostButton"
 import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
+import {useAuthStore} from "~/models/authStore"
+import type {Me} from "~/models/me"
 
 export async function clientLoader({params}: Route.ClientLoaderArgs) {
   const res = await fetch(`${baseApiPath()}/posts`, {
@@ -26,8 +27,8 @@ export function meta() {
 }
 
 export default function PostsHome({loaderData}: Route.ComponentProps) {
-  const {me} = useAuth()
   const {posts} = loaderData
+  const {me} = useOutletContext<{me: Me | null}>()
 
   return (
     <Main title="Posts">

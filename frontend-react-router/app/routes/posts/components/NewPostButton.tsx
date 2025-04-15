@@ -1,10 +1,10 @@
-import type { useAuth } from "~/components/AuthProvider";
 import LinkPrimary from "~/components/LinkPrimary";
+import type {Me} from "~/models/me"
 
 export function NewPostButton({
   me,
 }: {
-  me: ReturnType<typeof useAuth>["me"];
+  me: Me | null;
 }) {
   return (
     <>

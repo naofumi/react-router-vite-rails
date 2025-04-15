@@ -1,11 +1,9 @@
 import { Form, Link, NavLink } from "react-router";
-import { useAuth } from "~/components/AuthProvider";
 import LinkPrimary from "~/components/LinkPrimary"
 import ButtonPrimary from "~/components/ButtonPrimary"
-import {useEffect} from "react"
+import type {Me} from "~/models/me"
 
-export default function Nav() {
-  const { me } = useAuth();
+export default function Nav({ me }: { me: Me | null}) {
 
   return (
     <>
@@ -27,6 +25,7 @@ export default function Nav() {
           >
             Private
           </NavLink>
+          {me?.email}
         </div>
         <div>
           {me ? (

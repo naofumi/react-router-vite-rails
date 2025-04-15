@@ -1,4 +1,4 @@
-import {Form, redirect, useNavigate} from "react-router"
+import {Form, redirect, useNavigate, useOutletContext} from "react-router"
 import type {Route} from "../../../.react-router/types/app/routes/posts/+types/new"
 import {baseApiPath} from "~/utilities/proxy"
 import {getCSRFToken} from "~/utilities/csrf"
@@ -9,8 +9,8 @@ import LinkBack from "~/components/LinkBackTo"
 import Label from "~/components/Label"
 import Input from "~/components/Input"
 import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
-import {useAuth} from "~/components/AuthProvider"
 import {useEffect} from "react"
+import type {Me} from "~/models/me"
 
 export async function clientAction({request}: Route.ClientActionArgs) {
   const formData = await request.formData()
@@ -31,7 +31,7 @@ export async function clientAction({request}: Route.ClientActionArgs) {
 }
 
 export default function PostNew({actionData}: Route.ComponentProps) {
-  const {me} = useAuth()
+  const {me} = useOutletContext<{me: Me | null}>()
   const navigate = useNavigate()
 
   useEffect(() => {

@@ -2,7 +2,6 @@ import { Form, useNavigate } from "react-router";
 import type { Route } from "../../../.react-router/types/app/routes/sessions/+types/new";
 import { baseApiPath } from "~/utilities/proxy";
 import { getCSRFToken } from "~/utilities/csrf";
-import { useAuth } from "~/components/AuthProvider";
 import { useEffect } from "react";
 import Main from "~/components/Main";
 import CommandBar from "~/components/CommandBar";
@@ -10,6 +9,7 @@ import ButtonPrimary from "~/components/ButtonPrimary";
 import Input from "~/components/Input";
 import Label from "~/components/Label";
 import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
+import {useAuthStore} from "~/models/authStore"
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();
@@ -41,7 +41,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 export default function SessionsCreate({ actionData }: Route.ComponentProps) {
   const navigate = useNavigate();
   const error = actionData?.error || "";
-  const { resetMe } = useAuth();
+  const { resetMe } = useAuthStore();
 
   useEffect(() => {
     if (actionData?.data) {
