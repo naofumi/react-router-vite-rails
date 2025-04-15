@@ -6,8 +6,7 @@ import CommandBar from "~/components/CommandBar"
 import ButtonDangerOutline from "~/components/ButtonDangerOutline"
 import { NewPostButton } from "./components/NewPostButton"
 import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
-import {useAuthStore} from "~/models/authStore"
-import type {Me} from "~/models/me"
+import {type LayoutClientLoaderReturnType} from "~/layouts/default"
 
 export async function clientLoader({params}: Route.ClientLoaderArgs) {
   const res = await fetch(`${baseApiPath()}/posts`, {
@@ -28,7 +27,7 @@ export function meta() {
 
 export default function PostsHome({loaderData}: Route.ComponentProps) {
   const {posts} = loaderData
-  const {me} = useOutletContext<{me: Me | null}>()
+  const {me} = useOutletContext<LayoutClientLoaderReturnType>()
 
   return (
     <Main title="Posts">

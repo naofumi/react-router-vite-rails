@@ -1,9 +1,10 @@
 import Main from "~/components/Main"
 import {useOutletContext} from "react-router"
 import type {Me} from "~/models/me"
+import type {LayoutClientLoaderReturnType} from "~/layouts/default"
 
 export default function PrivatesHome() {
-  const { me } = useOutletContext<{ me: Me | null }>()
+  const { me } = useOutletContext<LayoutClientLoaderReturnType>()
 
   if (!me) return <div className="my-4 mx-auto max-w-md">
     <p>Unauthorized users cannot access this page.</p>
