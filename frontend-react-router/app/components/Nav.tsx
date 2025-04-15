@@ -26,7 +26,7 @@ export default function Nav({ me }: { me: Me | null}) {
             Private
           </NavLink>
         </div>
-        <div>
+        <div className="text-right">
           {me ? (
             <div className="flex flex-col items-end">
               <div className="font-bold text-xs">{me.email}</div>

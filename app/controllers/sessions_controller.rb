@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
         session[:user_id] = @user.id
 
         format.html { redirect_to posts_path, notice: "Successfully logged in!" }
-        format.json { render status: :created }
+        format.json { head :no_content, status: :created }
       else
         flash.now[:alert] = "Invalid email or password."
         format.html { render :new, status: :unprocessable_entity }

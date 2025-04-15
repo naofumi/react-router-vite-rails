@@ -13,11 +13,6 @@ export async function clientLoader() {
 export type LayoutClientLoaderReturnType = Awaited<ReturnType<typeof clientLoader>>
 
 export default function DefaultLayout({loaderData}: Route.ComponentProps) {
-  // To work around Development server issues where
-  // clientLoader is not called for some unknown reason.
-  // const {me} = true || process.env.NODE_ENV === "development"
-  //   ? {me: useAuthStore.getState().me}
-  //   : loaderData
   const data = loaderData
 
   return <>

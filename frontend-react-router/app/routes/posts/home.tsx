@@ -1,5 +1,5 @@
 import type {Route} from "../../../.react-router/types/app/routes/posts/+types/home"
-import {Form, Link, type MetaFunction, useOutletContext} from "react-router"
+import {Form, useOutletContext} from "react-router"
 import {baseApiPath} from "~/utilities/proxy"
 import Main from "~/components/Main"
 import CommandBar from "~/components/CommandBar"

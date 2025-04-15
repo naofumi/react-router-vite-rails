@@ -26,7 +26,6 @@ export async function clientAction({request}: Route.ClientActionArgs) {
     }
   )
 
-  await res.json()
   return redirect("/posts")
 }
 

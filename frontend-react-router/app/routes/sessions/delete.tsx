@@ -1,8 +1,7 @@
 import type {Route} from "../../../.react-router/types/app/routes/sessions/+types/delete"
 import {baseApiPath} from "~/utilities/proxy"
 import {getCSRFToken} from "~/utilities/csrf"
-import { useNavigate } from "react-router"
-import { useEffect } from "react"
+import {redirect} from "react-router"
 import {useAuthStore} from "~/models/authStore"
 
 export async function clientAction({request, params}: Route.ClientActionArgs) {
@@ -15,20 +14,8 @@ export async function clientAction({request, params}: Route.ClientActionArgs) {
       }
     })
     if (res.ok) {
-      return
-    } else {
-      const message = await res.json()
-      return message
+      useAuthStore.getState().resetMe()
     }
+    return redirect("/")
   }
-}
-
-export default function SessionDelete({actionData}: Route.ComponentProps) {
-  const {resetMe} = useAuthStore();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    resetMe()
-    navigate("/")
-  }, [resetMe, navigate]);
 }
