@@ -1,4 +1,5 @@
 <%= render 'technology_banner' %>
+<%= render 'technology_switch', switch_to: :react, url: "/react-router/" %>
 <div class="landing-page">
   <div class="container--landing-page">
     <main class="main--landing-page">
@@ -10,7 +11,7 @@
         Ruby on Rails
       </h2>
       <div class="link-box--landing-page my-10 flex items-center">
-        <%= link_to "See the Demo", "/react-router/posts",
+        <%= link_to "See the Demo", "/posts",
                     data: {turbo: false},
                     class: "link-box__btn--landing-page" %>
         <%= link_to "https://github.com/naofumi/react-router-vite-rails", class: "link-box__link--landing-page" do %>

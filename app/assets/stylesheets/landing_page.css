@@ -18,6 +18,7 @@
 
     .title--landing-page {
         font-size: 36px;
+        line-height: 1.1;
         font-weight: 600;
         letter-spacing: -0.025em;
         text-wrap: balance;
@@ -50,19 +51,19 @@
 
     .link-box__btn--landing-page {
         border-radius: 6px;
-        background-color: oklch(0.681 0.162 75.834);
+        background-color: var(--color-primary);
         padding: 10px 14px;
         font-size: 0.875rem;
         font-weight: 600;
         color: white;
         &:hover {
-            background-color: oklch(0.795 0.184 86.047)
+            background-color: var(--color-primary-light);
         }
         &:focus-visible {
             outline-style: solid;
             outline-width: 2px;
             outline-offset: 2px;
-            outline-color: oklch(0.681 0.162 75.834);
+            outline-color: var(--color-primary);
         }
     }
 
@@ -73,13 +74,13 @@
     }
 
     .p--landing-page {
-    /*    hyphens-auto text-justify mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-600*/
         hyphens: auto;
         text-align: justify;
         margin-top: 24px;
         margin-inline: auto;
         max-width: 576px;
         font-size: 1.125rem;
+        line-height: 32px;
         text-wrap: pretty;
         color: oklch(0.446 0.03 256.802);
     }

@@ -1,0 +1,9 @@
+<%
+  local_assigns => { switch_to:, url: }
+  {
+    :react => ["React version", "technology_switch__btn--react"],
+    :erb => ["ERB version", "technology_switch__btn--erb"]
+  }[switch_to] => [text, css_class]
+%>
+
+<%= link_to text, url, data: {turbo: false}, class: css_class %>

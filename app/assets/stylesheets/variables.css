@@ -4,13 +4,15 @@
     --color-gray-600: #4a5565;
     --color-gray-400: #99a1af;
     --color-grey: #999999;
-    --color-primary: #d08700;
-    --color-primary-light: oklch(0.795 0.184 86.047);
+    --color-primary: oklch(0.75 0.2 68);
+    --color-primary-light: oklch(0.85 0.15 68);
     --color-rails: #ef000b;
     --color-react: #155dfc;
     --color-success: oklch(0.627 0.194 149.214);
     --color-danger: oklch(0.577 0.245 27.325);
     --color-danger-light: #fb2c36;
+    --color-erb: oklch(0.577 0.245 27.325);
+    --color-react: oklch(0.546 0.245 262.881012);
 
     /* Font sizes, spacing, borders */
     --text-xs: 0.75rem;
