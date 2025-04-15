@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
       @session_authenticator.current_resource
     end
 
+    def authenticate_user!
+      redirect_to new_session_path, notice: "Please login to complete action"  unless current_user
+    end
+
     def simulate_slow_site
       # sleep 2 unless Rails.env.test?
     end
