@@ -7,7 +7,7 @@ export default function Nav({ me }: { me: Me | null}) {
 
   return (
     <>
-      <nav className="top-nav flex items-center justify-between px-4 py-2 border-b-2 border-gray-200">
+      <nav className="top-nav grid grid-cols-3 items-center px-4 py-2 border-b-2 border-gray-200">
         <Link to="/" className="text-xl hover:opacity-60">
           <div className="leading-0">
             <span className="text-blue-600">React Router</span>
@@ -18,14 +18,13 @@ export default function Nav({ me }: { me: Me | null}) {
             <span className="text-sm"> integration example </span>
           </div>
         </Link>
-        <div>
+        <div className="text-center">
           <NavLink
             to="/privates"
             className="top-nav__navlink text-xl text-gray-600 hover:text-yellow-600"
           >
             Private
           </NavLink>
-          {me?.email}
         </div>
         <div>
           {me ? (
