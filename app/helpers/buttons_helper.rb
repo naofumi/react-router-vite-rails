@@ -18,7 +18,7 @@ module ButtonsHelper
     if user
       link_to "New Post", new_post_path, class: "button button--primary"
     else
-      link_to "Login", new_session_path, class: "button button--primary"
+      link_to "Login to create new Post", new_session_path, class: "button button--primary"
     end
   end
 end

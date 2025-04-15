@@ -8,7 +8,7 @@ export default function Main({
   children?: ReactNode;
 }) {
   return (
-    <main className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
+    <main className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8 relative">
       <div className="mx-auto max-w-2xl text-center">
         <h1 className="font-semibold tracking-tight text-balance text-gray-600 text-5xl">
           {title}

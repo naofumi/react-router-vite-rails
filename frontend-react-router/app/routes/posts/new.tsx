@@ -8,6 +8,7 @@ import ButtonPrimary from "~/components/ButtonPrimary"
 import LinkBack from "~/components/LinkBackTo"
 import Label from "~/components/Label"
 import Input from "~/components/Input"
+import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
 
 export async function clientAction({request}: Route.ClientActionArgs) {
   const formData = await request.formData()
@@ -29,6 +30,7 @@ export async function clientAction({request}: Route.ClientActionArgs) {
 
 export default function PostNew({actionData}: Route.ComponentProps) {
   return <Main title="New Post">
+    <TechnologySwitchToErb url="/posts/new" />
     <CommandBar>
       <LinkBack to={`/posts`}>Back</LinkBack>
     </CommandBar>

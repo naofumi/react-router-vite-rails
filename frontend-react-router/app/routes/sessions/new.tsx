@@ -9,6 +9,7 @@ import CommandBar from "~/components/CommandBar";
 import ButtonPrimary from "~/components/ButtonPrimary";
 import Input from "~/components/Input";
 import Label from "~/components/Label";
+import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();
@@ -51,6 +52,7 @@ export default function SessionsCreate({ actionData }: Route.ComponentProps) {
 
   return (
     <Main title="Login">
+      <TechnologySwitchToErb url="/sessions/new" />
       <div className="my-4 mx-auto max-w-sm">
         <Form method="post">
           <div className="my-8">

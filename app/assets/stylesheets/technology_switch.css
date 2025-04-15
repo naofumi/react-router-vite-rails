@@ -7,24 +7,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    position: fixed;
-    top: 4px;
-    right: 8px;
-    &:hover {
-        opacity: 0.6;
-    }
-}
-
-.technology_switch__btn--erb {
-    border-radius: 8px;
-    background-color: red;
-    font-size: 1.125rem;
-    padding: 4px 8px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    position: fixed;
+    position: absolute;
     top: 4px;
     right: 8px;
     &:hover {

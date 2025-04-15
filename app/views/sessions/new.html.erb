@@ -3,6 +3,7 @@
 <%= content_for :title, "Login" %>
 
 <%= render "main", title: "Login" do %>
+  <%= render 'technology_switch', switch_to: :react, url: "/react-router/sessions/new" %>
   <%= form_with url: sessions_path, method: :post, class: "form" do |f| %>
     <div class="form__group">
       <%= f.label :email, "Email (sazae@example.com)", class: "form__label" %>

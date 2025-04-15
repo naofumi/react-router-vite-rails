@@ -1,5 +1,5 @@
 <nav class="top_nav">
-  <%= link_to posts_path, class: "top_nav__logo" do %>
+  <%= link_to root_path, class: "top_nav__logo" do %>
     <div class="leading-0">
       <span class="react-color text-xl">React Router</span>
       <span class="text-sm"> & </span>
@@ -9,15 +9,6 @@
       <span class="text-sm"> integration example </span>
     </div>
   <% end %>
-  <div>
-    <%= link_to "React", "/react-router/posts",
-                data: {turbo: false},
-                class: class_names("top_nav__navlink text-gray-600 mr-2",  "active": current_page?(posts_path)) %>
-  </div>
-  <div>
-    <%= link_to "ERB", posts_path,
-                class: class_names("top_nav__navlink text-gray-600 mr-2",  "active": current_page?(posts_path)) %>
-  </div>
   <div>
     <%= profile_button(current_user) %>
   </div>

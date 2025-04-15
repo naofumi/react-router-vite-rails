@@ -5,6 +5,7 @@
 @media(min-width: 640px) {
     .main {
         padding: 128px 24px;
+        position: relative;
     }
 }
 

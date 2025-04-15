@@ -6,6 +6,7 @@ import Main from "~/components/Main"
 import CommandBar from "~/components/CommandBar"
 import ButtonDangerOutline from "~/components/ButtonDangerOutline"
 import { NewPostButton } from "./components/NewPostButton"
+import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
 
 export async function clientLoader({params}: Route.ClientLoaderArgs) {
   const res = await fetch(`${baseApiPath()}/posts`, {
@@ -30,6 +31,7 @@ export default function PostsHome({loaderData}: Route.ComponentProps) {
 
   return (
     <Main title="Posts">
+      <TechnologySwitchToErb url="/posts" />
       <div className="mt-8">
         <CommandBar>
           <Form action="/fixtures" method="post">

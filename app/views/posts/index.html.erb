@@ -1,8 +1,8 @@
 <%= render "flash" %>
 
 <% content_for :title, "Posts" %>
-
 <%= render 'main', title: "Posts" do %>
+  <%= render 'technology_switch', switch_to: :react, url: "/react-router/posts" %>
   <div class="command-bar">
     <%= button_to "Reset Data", fixtures_path, method: :post,
                   class: "button button--danger--outline" %>
