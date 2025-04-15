@@ -3,7 +3,6 @@ import {isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration,} 
 import type {Route} from "./+types/root";
 import "./app.css";
 import {AuthProvider} from "./components/AuthProvider";
-import {useNavigation} from "react-router";
 
 export const links: Route.LinksFunction = () => [
   // { rel: "preconnect", href: "https://fonts.googleapis.com" },
