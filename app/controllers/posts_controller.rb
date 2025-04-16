@@ -8,6 +8,11 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+
+    respond_to do |format|
+      format.html
+      format.json { head :ok }
+    end
   end
 
   # POST /posts or /posts.json

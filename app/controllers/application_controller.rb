@@ -14,10 +14,15 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_user!
-      redirect_to new_session_path, notice: "Please login to complete action"  unless current_user
+      return if current_user
+
+      respond_to do |format|
+        format.html { redirect_to new_session_path, notice: "Please login to complete action" }
+        format.json { head :unauthorized }
+      end
     end
 
     def simulate_slow_site
-      # sleep 2 unless Rails.env.test?
+      sleep rand(0.5...1.5) unless Rails.env.test?
     end
 end
