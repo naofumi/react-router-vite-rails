@@ -1,13 +1,15 @@
 # React-Router-Vite-Rails
 
-This is an example web application that is built using the react_router_rails_spa gem.
+This is an example web application that is built using the [react_router_rails_spa gem](https://rubygems.org/gems/react_router_rails_spa).
 
-In addition to being very simple to set up, using an SPA framework has multiple UI/UX benefits.  
+In addition to being very simple to set up, using an SPA framework like React Router has multiple UI/UX benefits.  
 
 - [Jump to read how to build it](#how-it-is-built)
 - [See this example app deployed using Kamal](https://rrrails.castle104.com)
 
-## How to Use
+## Development set up
+
+These are the steps to get the current repository running on your machine.
 
 * Download the GitHub respository.
 * Install dependencies with `bundle install`
@@ -19,23 +21,41 @@ If you want to use the React Router development server with HMR, instead of buil
 Then access the page with ``http://localhost:5173/react`.
 Note that you will not be able to switch between ERB and React pages with the React Router development server.
 
+## Deployment
+
+Follow the steps
+described in the [react_router_rails_spa gem README](https://github.com/naofumi/react_router_rails_spa).
+
+Well, actually,
+deployment builds on top of `bin/rails assets:precompile`
+so there is nothing special to do here except maybe install Node in your CI/CD if you haven't already.
+
 ## Features
 
-Here are some of the benefits of using an SPA framework, that this demo applications showcases.
+This demo application showcases some of the benefits
+of integrating an SPA-framework like React Router, compared to the traditional way of integrating React with Rails
+(with webpacker, esbuild, vite-rails, etc.)
 
 ### Integrated Client-side Routing
 
-The react_router_rails_spa gem uses React Router in SPA framework mode and includes client-side routing.
+The [react_router_rails_spa gem](https://github.com/naofumi/react_router_rails_spa) uses React Router in [SPA framework mode](https://reactrouter.com/how-to/spa)
+and integrates client-side routing (you do not have to install React Router yourself).
+
 It also integrates loader-based fetching.
 Loader-based fetching allows parallel loading of code-split fragments and page data,
 ensuring that code-splitting does not cause decrease performance due to request waterfalls.
-It also eliminates fidgety and distracting flicker that is often seen in SPAs due to gradual loading of multiple elements.
+You can benefit from code-splitting without compromising on page-load performance.
+
+It also eliminates fidgety and distracting flicker that is often seen in SPAs due to stepwise loading of multiple elements.
+
+In short, embracing loader-based fetching will improve the UI/UX of your application.
 
 ### Automatic Code-splitting
 
-When you build the React Router application using `bin/rails react:build`, you can see how the whole application is deployed inside the Rails' `public` folder. 
-You can also see how the application has been split into multiple files.
-Note that each route has been automatically code-split, using information from the integrated router and without manual configuration.
+When you build the React Router application using `bin/rails react:build`, the whole application is code-split and deployed inside the Rails' `public` folder. 
+The table below shows the generated code-fragments.
+
+Note that the code for each route has been split automatically, using information from the integrated router and without manual configuration.
 This will ensure that even when your application grows to hundreds of pages, the initial page load will remain fast.
 
 ![Code Splitting](documentation/images/assets-compiled.png)
@@ -46,7 +66,9 @@ NPM package installation and the React Router build step are integrated into the
 Artifacts are stored inside the Ruby on Rails `public` folder.
 
 This means that production server configuration and CD scripts do not need any special configuration.
-We deploy using Kamal and you can confirm that there are not special build steps in the `Dockerfile`.
+The CI/CD build steps are described in the `Dockerfile`.
+
+Please take a look and confirm that there are no additional steps compared to a regular Rails deployment.
 
 ### Integration with ERB views and Authentication
 
@@ -58,18 +80,21 @@ and shares the same domain and hence cookies.
 
 ### SEO-optimized Pages with ERB
 
-Although you may not need SEO for the React pages, you still may want your landing page and some marketing pages to be SEO-friendly.
+In dynamic React-based applications, you're often faced with two choices:
+leveraging server-side rendering (SSR) for SEO optimization (e.g., with frameworks like Next.js)
+or deploying a static SPA for the simplicity of serving static assets.
+However, this dichotomy is false — you can, in fact, have your cake and eat it too.
 
-As I mentioned above, it is easy to integrate SEO-optimized, server-side rendered ERB pages with React pages.
+As I mentioned above, you can easily integrate SEO-optimized, server-side rendered ERB pages with static React SPA pages.
 
-You do not need a separate SSR server like Next.js for SEO. Just use ERB.
+For dynamic pages that need to be SEO-optimized, just use ERB and optionally use Hotwire for interactivity.
+For other pages, you can use a React SPA that is hosted on the Rails `public` folder.
 
 ### Reduce flicker with loaders
 
 Flickering is a common issue with React applications and in particular SPAs.
-It is challenging to prevent with CSR when fetching data inside a `useEffect()`,
-and is often hidden behind a skeleton or loading screen.
 
-React Router provides a loader-based solution which is very effective against flickering.
-In this demo, we have used it whenever possible.
-As a result, despite the 1-second delay artificially introduced on the server, there is no apparent flicker.
+With React Router SPA framework mode, you can eliminate flicker by loading data in the loaders.
+This demo provides two identical pages that differ by loading strategy only.
+You can compare the UX of a flicker-less page using a loader,
+and a flickering page built in the traditional way with useEffect.
