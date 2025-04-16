@@ -1,4 +1,15 @@
-// authStore.ts
+/*
+* authStore.ts
+*
+* We use zustand to store global state.
+* In the current app, we cache the result of calling `getMe()` for authentication.
+*
+* With ReactRouter, you will often want to keep business/application logic inside the loaders and actions,
+* which are outside the React context and cannot access any `useContext` state.
+*
+* Instead, we use Zustand which is a lightweight global state management library that works outside of React.
+*
+* */
 import { create } from 'zustand'
 import {getMe, type Me} from "~/models/me"
 
