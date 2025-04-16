@@ -11,19 +11,21 @@ import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
 import {useAuthStore} from "~/models/authStore"
 
 export async function clientLoader() {
-  // We authenticate in the loader to prevent flickering.
-  // Since `/user/me` is called in the layout loader too,
-  // we will be sending two requests to `/user/me` at the same time.
-  //
-  // We could ensure that only one request to `/user/me` is sent if we
-  // call `useAuthStore().me` in the layout, since the loader for layout is
-  // guaranteed to have been completed.
-  // However, calling `navigate()` must happen in a useEffect, and so this
-  // will create flickering of the login page before redirecting to the
-  // posts' page.
-  //
-  // Here we prioritize preventing flickering.
-  // Deduplicating requests may be preventable with Tanstack Query.
+/*
+* We authenticate in the loader to prevent flickering.
+* Since `/user/me` is called in the layout loader too,
+* we will be sending two requests to `/user/me` at the same time.
+*
+* We could ensure that only one request to `/user/me` is sent if we
+* call `useAuthStore().me` in the layout, since the loader for layout is
+* guaranteed to have been completed.
+* However, calling `navigate()` must happen in a useEffect, and so this
+* will create flickering of the login page before redirecting to the
+* posts' page.
+*
+* Here we prioritize preventing flickering.
+* Deduplicating requests may be preventable with Tanstack Query.
+*/
   const me = await useAuthStore.getState().fetchMe();
   if (me) {
     return redirect("/posts");
