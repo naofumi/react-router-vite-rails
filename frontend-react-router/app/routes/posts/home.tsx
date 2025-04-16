@@ -7,6 +7,7 @@ import ButtonDangerOutline from "~/components/ButtonDangerOutline"
 import { NewPostButton } from "./components/NewPostButton"
 import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
 import {type LayoutClientLoaderReturnType} from "~/layouts/default"
+import SwitchLoadingModes from "~/routes/posts/components/SwitchLoadingModes"
 
 export async function clientLoader({params}: Route.ClientLoaderArgs) {
   const res = await fetch(`${baseApiPath()}/posts`, {
@@ -30,8 +31,9 @@ export default function PostsHome({loaderData}: Route.ComponentProps) {
   const {me} = useOutletContext<LayoutClientLoaderReturnType>()
 
   return (
-    <Main title="Posts">
+    <Main title="Posts" subtitle="with loader-based data loading">
       <TechnologySwitchToErb url="/posts" />
+      <SwitchLoadingModes url="/posts/classic" label="useEffect pattern"/>
       <div className="mt-8">
         <CommandBar>
           <Form action="/fixtures" method="post">

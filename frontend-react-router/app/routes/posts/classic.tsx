@@ -9,6 +9,7 @@ import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
 import {type LayoutClientLoaderReturnType} from "~/layouts/default"
 import {useEffect, useState} from "react"
 import {getMe, type Me} from "~/models/me"
+import SwitchLoadingModes from "~/routes/posts/components/SwitchLoadingModes"
 
 export async function clientLoader({params}: Route.ClientLoaderArgs) {
   const res = await fetch(`${baseApiPath()}/posts`, {
@@ -33,7 +34,7 @@ export default function PostsClassic() {
 
 
   useEffect(() => {
-    (async () => {
+    const getAndSetPosts = async () => {
       const res = await fetch(`${baseApiPath()}/posts`, {
           method: 'GET',
           headers: {"Accept": "application/json"}
@@ -41,19 +42,20 @@ export default function PostsClassic() {
       )
       const data: Post[] = await res.json()
       setPosts(data)
-    })()
-  }, [])
+    }
+    getAndSetPosts()
 
-  useEffect(() => {
-    (async () => {
+    const getAndSetMe = async () => {
       const data = await getMe()
       setMe(data)
-    })()
+    }
+    getAndSetMe()
   }, [])
 
   return (
-    <Main title="Posts">
+    <Main title="Posts" subtitle="with useEffect-based data loading">
       <TechnologySwitchToErb url="/posts" />
+      <SwitchLoadingModes url="/posts" label="loader pattern"/>
       <div className="mt-8">
         <CommandBar>
           <Form action="/fixtures" method="post">
