@@ -12,7 +12,7 @@ export default [
     route("sessions/:id", "routes/sessions/delete.tsx"),
     route("posts", "routes/posts/home.tsx"),
     route("posts/new", "routes/posts/new.tsx"),
-    route("privates", "routes/privates/home.tsx"),
+    route("posts/classic", "routes/posts/classic.tsx"),
     route("fixtures", "routes/fixtures/home.tsx"),
   ]),
 ] satisfies RouteConfig;
