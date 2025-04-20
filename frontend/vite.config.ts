@@ -3,32 +3,32 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
+const railsEnv = process.env.RAILS_ENV || 'development'
+
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   build: {
     assetsDir: "assets",
-    // Set to true if you want sourcemaps
-    sourcemap: true,
+    // Set to true if you want sourcemaps in your build.
+    sourcemap: (["test", "development"].indexOf(railsEnv) !== -1) ? true : false,
   },
-  // Like in react-router.config.ts, this tells Vite that
-  // the app is served from the "/react-router/" sub-path.
-  // Change this if you want to use a different sub-path name.
+  // As also defined in react-router.config.ts, this tells Vite that
+  // the app is served from the "/react/" sub-path.
   base: "/react/",
 
   // These are settings for the dev server.
   server: {
-    // In production, the API server (Rails) and the assets
-    // will be served from the same port number (typically 80).
+    // In production and preview mode, the API server (Rails) and the assets
+    // will be served from the same port number (typically 80 for production and 3000 for preview).
     //
-    // However, in development, assets will be served from the
-    // Vite dev server on port 5173, and the API server will be on
-    // port 3000 (Rails default).
-    // The use of different ports can complicate CORS setting and cookie handling.
+    // However, when using the vite development server, assets will be served from port 5173,
+    // and the API server will be on port 3000 (Rails default).
+    // The use of different ports complicates CORS settings and cookie handling.
     //
-    // To prevent this problem, Vite provides a proxy mode that can receive API requests
-    // on port (5173) and forward this to the Rails server (port 3000).
-    // The browser will think that all communication happens on port 5173 so CORS
-    // is no longer necessary.
+    // To work around this, Vite provides a proxy mode that can receive API requests
+    // on port (5173) and forward them to the Rails server (port 3000).
+    // From the browser's viewpoint, all communications including API requests to the Rails server
+    // will now happen on port 5173, so CORS will no longer be necessary.
     proxy: {
       // Any requests starting with "/api" will be forwarded according to
       // the following rules.
@@ -44,6 +44,8 @@ export default defineConfig({
         // Note that if the Rails server has a dedicated namespace for APIs,
         // then you can just use that instead of "/api", and the following
         // rewrite rule will not be necessary.
+        //
+        // Also see `frontend/app/utilities/proxy.ts` for how we handle this inside React.
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },

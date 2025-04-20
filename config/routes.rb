@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  # When we use React Router inside a subdirectory, it works better if we
+  # use a trailing slash for the root path.
+  # This redirects from "/react-router" to "/react-router/".
+  get "react", to: redirect("/react/"), constraints: ->(req) {
+      req.original_url.last != "/"
+    }
+
+  # All requests to `/react/*` are handled by ReactController#show.
+  match "react", to: "react#show", via: :all
+  get "react/*path", to: "react#show"
   resources :users do
     get :me, on: :collection
   end

@@ -14,13 +14,13 @@
 *
 * How it works.
 *
-* 1. The Ruby on Rails server sends the session-specific
+* 1. The Ruby on Rails server creates and sends the session-specific
 *    CSRF token in a Cookie named "X-CSRF-Token"
 *    app/controllers/concerns/csrf_cookie_enabled.rb
 * 2. Retrieve this token with the `getCSRFToken()` function
 *    and use its value to send in your fetch request headers.
 * 3. On receiving the request, Rails will validate that the
-*    'X-CSRF-Token' header value matches what was sent via the cookie.
+*    'X-CSRF-Token' header value is identical to the session-specific token.
 * 4. Note that you only need to do this for non-GET requests assuming that
 *    you are following best practices and not mutating data in GET requests.
 *
@@ -35,6 +35,10 @@
 *        body: JSON.stringify({content})
 *      }
 *    )
+*
+* Note that Axios has a feature that automatically does this for you.
+* Read the XSRF configuration comments on the linked page.
+* https://axios-http.com/docs/req_config
 *
 * */
 
