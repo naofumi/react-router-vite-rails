@@ -14,7 +14,10 @@
       <%= f.password_field :clear_password, class: "form__input" %>
     </div>
     <div class="form__group">
-      <%= f.submit "Login", class: "button button--primary font-bold" %>
+      <%= f.button type: :submit, class: "button button--primary font-bold",
+                   data: {controller: "loadable", action: "click->loadable#activate"} do %>
+        <span class="button__loader"></span>Login
+      <% end %>
     </div>
   <% end %>
 <% end %>

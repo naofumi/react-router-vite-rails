@@ -4,6 +4,10 @@
     cursor: pointer;
     text-decoration: none;
     border: solid 1px transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 8px;
 }
 
 .button--primary {
@@ -46,4 +50,28 @@
 .button__row {
     display: flex;
     align-items: center;
+}
+
+.button__loader {
+    display: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: loader__rotation 1s linear infinite;
+}
+
+[aria-disabled=true] .button__loader {
+    display: inline-block;
+}
+
+@keyframes loader__rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

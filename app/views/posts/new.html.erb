@@ -19,7 +19,10 @@
       <%= f.text_field :content, placeholder: "Content", class: "form__input" %>
       <div class="command-bar">
         <span></span>
-        <%= f.button "Submit", type: :submit, class: "button button--primary" %>
+        <%= f.button type: :submit, class: "button button--primary",
+                     data: { controller: "loadable", action: "click->loadable#activate" } do %>
+          <span class="size-4 button__loader"></span>Submit
+        <% end %>
       </div>
     <% end %>
   </div>

@@ -49,24 +49,6 @@
         column-gap: 24px;
     }
 
-    .link-box__btn--landing-page {
-        border-radius: 6px;
-        background-color: var(--color-primary);
-        padding: 10px 14px;
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: white;
-        &:hover {
-            background-color: var(--color-primary-light);
-        }
-        &:focus-visible {
-            outline-style: solid;
-            outline-width: 2px;
-            outline-offset: 2px;
-            outline-color: var(--color-primary);
-        }
-    }
-
     .link-box__link--landing-page {
         font-size: 0.875rem;
         font-weight: 600;

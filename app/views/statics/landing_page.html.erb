@@ -11,9 +11,8 @@
         Ruby on Rails
       </h2>
       <div class="link-box--landing-page my-10 flex items-center">
-        <%= link_to "See the Demo", "/posts",
-                    data: {turbo: false},
-                    class: "link-box__btn--landing-page" %>
+        <%= link_to_with_loader "See the Demo", "/posts",
+                    class: "button button--primary" %>
         <%= link_to "https://github.com/naofumi/react-router-vite-rails", class: "link-box__link--landing-page" do %>
           See the code on GitHub <span aria-hidden="true">→</span>
         <% end %>

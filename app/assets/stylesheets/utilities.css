@@ -53,3 +53,12 @@
     height: 1.5rem;
     width: 1.5rem;
 }
+
+.size-4 {
+    height: 1rem;
+    width: 1rem;
+}
+
+.hidden {
+    display: none;
+}
