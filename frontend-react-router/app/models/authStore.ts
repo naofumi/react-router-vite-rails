@@ -11,24 +11,26 @@
 *
 * */
 import { create } from 'zustand'
-import {getMe, type Me} from "~/models/me"
+import {getMe} from "~/models/me"
+
+type dataType = Awaited<ReturnType<typeof getMe>>
 
 type AuthState = {
-  me: null | Me
-  meLoaded: boolean
-  resetMe: () => void
-  fetchMe: () => Promise<Me | null>
+  data: dataType
+  isCached: boolean
+  reset: () => void
+  fetch: () => Promise<dataType>
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
-  me: null,
-  meLoaded: false,
-  fetchMe: async (): Promise<Me | null> => {
-    if (!get().meLoaded) {
-      const loadedMe = await getMe()
-      set({ "me": loadedMe, meLoaded: true })
+  data: null,
+  isCached: false,
+  fetch: async (): Promise<dataType> => {
+    if (!get().isCached) {
+      const newData = await getMe()
+      set({ "data": newData, isCached: true })
     }
-    return get().me
+    return get().data
   },
-  resetMe: () => set({ me: null, meLoaded: false }),
+  reset: () => set({ data: null, isCached: false }),
 }))

@@ -14,7 +14,7 @@ export async function clientAction({request, params}: Route.ClientActionArgs) {
       }
     })
     if (res.ok) {
-      useAuthStore.getState().resetMe()
+      useAuthStore.getState().reset()
     }
     return redirect("/")
   }

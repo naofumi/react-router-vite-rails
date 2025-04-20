@@ -26,7 +26,7 @@ export async function clientLoader() {
 * Here we prioritize preventing flickering.
 * Deduplicating requests may be preventable with Tanstack Query.
 */
-  const me = await useAuthStore.getState().fetchMe();
+  const me = await useAuthStore.getState().fetch();
   if (me) {
     return redirect("/posts");
   }
@@ -51,7 +51,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
       // We reset the authStore, which causes a request to /users/me to be sent
       // the next time layouts/default.tsx is rendered.
       // useAuthStore is set then.
-      useAuthStore.getState().resetMe();
+      useAuthStore.getState().reset();
       return redirect("/posts")
     } else {
       const error: { error: string } = await res.json();

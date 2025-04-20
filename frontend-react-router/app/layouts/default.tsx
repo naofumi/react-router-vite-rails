@@ -5,7 +5,7 @@ import {useAuthStore} from "~/models/authStore"
 import type {Route} from "../../.react-router/types/app/layouts/+types/default";
 
 export async function clientLoader() {
-  const me = await useAuthStore.getState().fetchMe()
+  const me = await useAuthStore.getState().fetch()
 
   return {me}
 }
