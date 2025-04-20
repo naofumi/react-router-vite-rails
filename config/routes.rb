@@ -21,11 +21,11 @@ Rails.application.routes.draw do
 
   # When we use React Router inside a subdirectory, it works better if we
   # use a trailing slash for the root path.
-  # This redirects from "/react-router" to "/react-router/".
-  get "react-router", to: redirect("/react-router/"), constraints: ->(req) {
+  # This redirects from "/react" to "/react/".
+  get "react", to: redirect("/react/"), constraints: ->(req) {
     req.original_url.last != "/"
   }
-  # All requests to `/react-router/*` are handled by ReactController#show.
+  # All requests to `/react/*` are handled by ReactController#show.
   #
   # Note that we DO NOT serve the `index.html` file directly using Rails' static server middleware.
   # There are a few reasons for this:
@@ -41,6 +41,6 @@ Rails.application.routes.draw do
   #   the cookies on the first load.
   #   Otherwise, if the index.html file was served statically, you would need a
   #   separate request just to get the CSRF token.
-  match "react-router", to: "react#show", via: :all
-  match "react-router/*path", to: "react#show", via: :all
+  match "react", to: "react#show", via: :all
+  match "react/*path", to: "react#show", via: :all
 end

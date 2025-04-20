@@ -47,7 +47,7 @@ namespace :react_router do
   # Run bin/rails react_router:clobber to remove the build files.
   # Running bin/rails assets:clobber will also run this task.
   task :clobber do
-    FileUtils.rm_rf("#{Dir.pwd}/public/react-router")
+    FileUtils.rm_rf("#{Dir.pwd}/public/react")
   end
 end
 

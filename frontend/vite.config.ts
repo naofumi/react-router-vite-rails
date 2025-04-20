@@ -13,7 +13,7 @@ export default defineConfig({
   // Like in react-router.config.ts, this tells Vite that
   // the app is served from the "/react-router/" sub-path.
   // Change this if you want to use a different sub-path name.
-  base: "/react-router/",
+  base: "/react/",
 
   // These are settings for the dev server.
   server: {

@@ -34,7 +34,7 @@
 /config/master.key
 
 # Ignore React Router builds of React
-/public/react-router/
+/public/react/
 
 # Ignore editor
 .idea

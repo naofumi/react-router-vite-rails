@@ -19,6 +19,6 @@ class ReactController < ApplicationController
   # * By going through the Rails controller, we can adjust cache and cookie headers to
   #   improve performance, reliability, and integration with Rails.
   def show
-    render file: Rails.root.join("public", "react-router", "react-router-index.html")
+    render file: Rails.root.join("public", "react", "react-router-index.html")
   end
 end
