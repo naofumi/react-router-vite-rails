@@ -3,7 +3,7 @@ namespace :react_router do
   # Installed will be automatically initiated by other tasks.
   desc "Install npm packages for the React Router app"
   task :npm_install do
-    Dir.chdir("#{Dir.pwd}/frontend-react-router") do
+    Dir.chdir("#{Dir.pwd}/frontend") do
       puts "Install npm packages ..."
       system("npm", "install")
     end
@@ -17,7 +17,7 @@ namespace :react_router do
   # bin/rails react_router:dev
   desc "Start React Router Dev Server"
   task dev: [ :npm_install ] do
-    Dir.chdir("#{Dir.pwd}/frontend-react-router") do
+    Dir.chdir("#{Dir.pwd}/frontend") do
       system("npm", "run", "dev")
     end
   end
@@ -25,21 +25,21 @@ namespace :react_router do
   # bin/rails react_router:typecheck
   desc "Check Typescript for the React Router App"
   task typecheck: [ :npm_install ] do
-    Dir.chdir("#{Dir.pwd}/frontend-react-router") do
+    Dir.chdir("#{Dir.pwd}/frontend") do
       system("npm", "run", "typecheck")
     end
   end
 
   # Run bin/rails react_router:build to build the production app.
   # The location of the build is defined in the
-  # frontend-react-router/react-router.config.ts file, and should
+  # frontend/react-router.config.ts file, and should
   # point to a location within the public folder.
   # Running bin/rails assets:precompile will also run this task.
   #
   # bin/rails react_router:build
   desc "Build React Router App"
   task build: [ :npm_install ] do
-    Dir.chdir("#{Dir.pwd}/frontend-react-router") do
+    Dir.chdir("#{Dir.pwd}/frontend") do
       system("npm", "run", "build")
     end
   end

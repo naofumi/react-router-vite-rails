@@ -11,7 +11,7 @@
 * Therefore, when running on the Vite development server, we prefix
 * requests intended for the Rails API server with "/api" to tell Vite to send them
 * to port 3000.
-* See the `proxy:` section in `frontend-react-router/vite.config.ts` for
+* See the `proxy:` section in `frontend/vite.config.ts` for
 * the Vite side of this configuration.
 *
 * Using this function, you would write a request to the Rails API as follows.

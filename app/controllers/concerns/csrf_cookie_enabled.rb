@@ -2,7 +2,7 @@
 # allowing you to easily use the robust CSRF protection that Ruby on Rails provides
 # inside your React Router app.
 #
-# Refer to `frontend-react-router/app/utilities/csrf.ts` to see
+# Refer to `frontend/app/utilities/csrf.ts` to see
 # how the client side is implemented.
 module CsrfCookieEnabled
   extend ActiveSupport::Concern
