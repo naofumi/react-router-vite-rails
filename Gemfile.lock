@@ -1,8 +1,3 @@
-PATH
-  remote: /Users/nao/ProgrammingProjects/react_router_rails/react_router_rails_spa
-  specs:
-    react_router_rails_spa (0.1.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -254,6 +249,7 @@ GEM
     rake (13.2.1)
     rdoc (6.12.0)
       psych (>= 4.0.0)
+    react_router_rails_spa (0.1.1)
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
@@ -387,7 +383,7 @@ DEPENDENCIES
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.1)
-  react_router_rails_spa!
+  react_router_rails_spa
   rubocop-rails-omakase
   selenium-webdriver
   solid_cable
