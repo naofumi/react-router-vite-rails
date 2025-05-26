@@ -18,7 +18,7 @@ These are the steps to get the current repository running on your machine.
 * Access `http://localhost:3000`
 
 If you want to use the React Router development server with HMR, instead of building the React application, run the development server with `bin/rails react:dev`.
-Then access the page with ``http://localhost:5173/react`.
+Then access the page with `http://localhost:5173/react`.
 Note that you will not be able to switch between ERB and React pages with the React Router development server.
 
 ## Deployment
