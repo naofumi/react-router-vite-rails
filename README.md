@@ -14,10 +14,10 @@ These are the steps to get the current repository running on your machine.
 * Download the GitHub respository.
 * Install dependencies with `bundle install`
 * Start the Ruby on Rails application with `bin/dev`
-* Build the React application with `bin/rails react:preview`
+* Build the React application with `bin/rails react_router:preview`
 * Access `http://localhost:3000`
 
-If you want to use the React Router development server with HMR, instead of building the React application, run the development server with `bin/rails react:dev`.
+If you want to use the React Router development server with HMR, instead of building the React application, run the development server with `bin/rails react_router:dev`.
 Then access the page with ``http://localhost:5173/react`.
 Note that you will not be able to switch between ERB and React pages with the React Router development server.
 
@@ -52,7 +52,7 @@ In short, embracing loader-based fetching will improve the UI/UX of your applica
 
 ### Automatic Code-splitting
 
-When you build the React Router application using `bin/rails react:build`, the whole application is code-split and deployed inside the Rails' `public` folder. 
+When you build the React Router application using `bin/rails react_router:build`, the whole application is code-split and deployed inside the Rails' `public` folder. 
 The table below shows the generated code-fragments.
 
 Note that the code for each route has been split automatically, using information from the integrated router and without manual configuration.
