@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-first_post:
-  content: This is my first post
+<% 1.upto(15) do |i| %>
+post_<%= i * 2 - 1 %>:
+  content: This is post number <%= i %>
+  author: sazae
+  created_at: <%= 2.days.ago + (i * 2 - 1).minutes %>
 
-second_post:
-  content: This is my second post
-
-third_post:
-  content: This is my third post
-
-fourth_post:
-  content: This is my fourth post
+post_<%= i * 2 %>:
+  content: This is post number <%= i + 1 %>
+  author: masuo
+  created_at: <%= 2.days.ago + (i * 2).minutes %>
+<% end %>

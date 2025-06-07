@@ -52,7 +52,7 @@
     align-items: center;
 }
 
-.button__loader {
+.button-loader {
     display: none;
     width: 24px;
     height: 24px;
@@ -60,14 +60,18 @@
     border-bottom-color: transparent;
     border-radius: 50%;
     box-sizing: border-box;
-    animation: loader__rotation 1s linear infinite;
+    animation: button-loader__animation 1s linear infinite;
 }
 
-[aria-disabled=true] .button__loader {
+[disabled] > .button-loader {
     display: inline-block;
 }
 
-@keyframes loader__rotation {
+[aria-busy="true"] > .button-loader {
+    display: inline-block;
+}
+
+@keyframes button-loader__animation {
     0% {
         transform: rotate(0deg);
     }

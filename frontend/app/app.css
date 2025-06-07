@@ -1,19 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+    @apply bg-white dark:bg-gray-950;
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+    @media (prefers-color-scheme: dark) {
+        color-scheme: dark;
+    }
 }
 
 .top-nav__navlink.active {
-  @apply text-yellow-600;
+    @apply text-yellow-600;
+}
+
+.button-loader {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: button-loader__animation 1s linear infinite;
+}
+
+.pending .button-loader {
+    display: inline-block;
+}
+
+@keyframes button-loader__animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

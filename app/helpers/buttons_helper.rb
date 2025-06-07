@@ -6,8 +6,8 @@ module ButtonsHelper
           safe_join [
             tag.div(user.email, class: "top_nav__email"),
             f.button(class: "button button--primary font-bold",
-                     data: { controller: "loadable", action: "click->loadable#activate" }) {
-              safe_join [ tag.span(class: "size-4 button__loader"), "Logout" ]
+                     data: { controller: "loaderable", action: "click->loaderable#activate" }) {
+              safe_join [ tag.span(class: "size-4 button-loader"), "Logout" ]
             }
           ]
         end
@@ -26,8 +26,8 @@ module ButtonsHelper
   end
 
   def link_to_with_loader(label, url, **args)
-    link_to(url, **args, data: { controller: "loadable", action: "click->loadable#activate" }) do
-      safe_join [ tag.span(class: "size-4 button__loader"), label ]
+    link_to(url, **args, data: { controller: "loaderable", action: "click->loaderable#activate" }) do
+      safe_join [ tag.span(class: "size-4 button-loader"), label ]
     end
   end
 end

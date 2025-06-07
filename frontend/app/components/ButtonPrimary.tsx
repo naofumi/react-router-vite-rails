@@ -13,7 +13,7 @@ export default function ButtonPrimary({
   return (
     <button
       type={type}
-      className="px-2 py-1 text-white bg-yellow-600 hover:bg-yellow-500 rounded cursor-pointer"
+      className="inline-flex items-center justify-center gap-x-2 px-2 py-1 text-white bg-yellow-600 hover:bg-yellow-500 rounded cursor-pointer"
     >
       {children}
     </button>

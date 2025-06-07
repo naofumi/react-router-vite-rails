@@ -9,17 +9,20 @@ import LinkBack from "~/components/LinkBackTo"
 import Label from "~/components/Label"
 import Input from "~/components/Input"
 import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
-import type {Me} from "~/models/me"
+import {z} from "zod"
 
 /*
-* The /posts/new page does not need server data for rendering.
-* On the other hand, we want to only allow authenticated users to access this page.
+* The server response to `/posts/new` determines whether the user can see this page.
 *
-* To achieve this, it is possible to manage authorization on the client.
-* However, it is generally better to handle all authorization logic on the server.
+* If an unauthenticated user accesses this page, the server will return a 401 response.
+* The clientLoader will then throw an error which will be handled at
+* the error boundary at `react-router-vite-rails/frontend/app/root.tsx`.
 *
-* Therefore, we send a request just to check whether the current user can access this page.
-* The server just responds with a standard status.
+* This keeps authorization logic on the server.
+*
+* A common alternative solution is to check the presence of the currentUser in `useApplicationContext()`.
+* However, this is authorization logic.
+* It should not be evaluated on the client.
 * */
 export async function clientLoader() {
   const res = await fetch(`${baseApiPath()}/posts/new`, {
@@ -49,8 +52,6 @@ export async function clientAction({request}: Route.ClientActionArgs) {
 }
 
 export default function PostNew({actionData}: Route.ComponentProps) {
-  const {me} = useOutletContext<{me: Me | null}>()
-  const navigate = useNavigate()
 
   return <Main title="New Post">
     <TechnologySwitchToErb url="/posts/new" />
@@ -64,7 +65,10 @@ export default function PostNew({actionData}: Route.ComponentProps) {
         <Input type="text"
                id="content"
                name="content"
-               placeholder="Content"/>
+               placeholder="Content"
+               required={true}
+               autoComplete="off"
+        />
         <CommandBar>
           <span></span>
           <ButtonPrimary type="submit">Submit</ButtonPrimary>

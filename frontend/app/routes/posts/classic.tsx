@@ -1,26 +1,34 @@
 import type {Route} from "../../../.react-router/types/app/routes/posts/+types/home"
-import {Form, useOutletContext} from "react-router"
+import {Form} from "react-router"
 import {baseApiPath} from "~/utilities/proxy"
 import Main from "~/components/Main"
 import CommandBar from "~/components/CommandBar"
 import ButtonDangerOutline from "~/components/ButtonDangerOutline"
 import { NewPostButton } from "./components/NewPostButton"
 import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
-import {type LayoutClientLoaderReturnType} from "~/layouts/default"
 import {useEffect, useState} from "react"
-import {getMe, type Me} from "~/models/me"
 import SwitchLoadingModes from "~/routes/posts/components/SwitchLoadingModes"
+import {useApplicationContext} from "~/layouts/useApplicationContext"
+import {z} from "zod"
 
-export async function clientLoader({params}: Route.ClientLoaderArgs) {
-  const res = await fetch(`${baseApiPath()}/posts`, {
-      method: 'GET',
-      headers: {"Accept": "application/json"}
-    }
-  )
-  const posts: Post[] = await res.json()
+/*
+* This page uses page-tailored APIs
+* */
+export const apiSchema = z.strictObject({
+  posts: z.array(z.strictObject({
+    id: z.number(),
+    content: z.string(),
+    url: z.string(),
+    author: z.strictObject({
+      email: z.string(),
+    }),
+    highlighted: z.boolean(),
+    canEditPost: z.boolean(),
+  })),
+  permissions: z.strictObject({canCreatePost: z.boolean()})
+});
 
-  return {posts}
-}
+export async function clientLoader({params}: Route.ClientLoaderArgs) { return null }
 
 export function meta() {
   return [
@@ -29,27 +37,24 @@ export function meta() {
 }
 
 export default function PostsClassic() {
-  const [posts, setPosts] = useState<Post[]>([])
-  const [me, setMe] = useState<Me | null>(null)
+  const {context} = useApplicationContext()
 
+  const [data, setData] = useState<z.infer<typeof apiSchema>>({posts: [], permissions: {canCreatePost: false}})
+  const [error, setError] = useState<{status: number, message: string} | null>(null)
 
   useEffect(() => {
-    const getAndSetPosts = async () => {
+    (async () => {
       const res = await fetch(`${baseApiPath()}/posts`, {
           method: 'GET',
           headers: {"Accept": "application/json"}
         }
       )
-      const data: Post[] = await res.json()
-      setPosts(data)
-    }
-    getAndSetPosts()
-
-    const getAndSetMe = async () => {
-      const data = await getMe()
-      setMe(data)
-    }
-    getAndSetMe()
+      if (!res.ok) {
+        setError({status: res.status, message: res.statusText})
+      }
+      const json = await res.json()
+      setData(apiSchema.parse(json))
+    })()
   }, [])
 
   return (
@@ -58,12 +63,15 @@ export default function PostsClassic() {
       <SwitchLoadingModes url="/posts" label="loader pattern"/>
       <div className="mt-8">
         <CommandBar>
-          <Form action="/fixtures" method="post">
-            <ButtonDangerOutline type="submit">Reset Data</ButtonDangerOutline>
-          </Form>
-          <NewPostButton me={me} />
+          {context?.featureFlags.resetDataFeature ?
+            <Form action="/fixtures" method="post">
+              <ButtonDangerOutline type="submit">Reset Data</ButtonDangerOutline>
+            </Form> :
+            <div></div>}
+          <NewPostButton canCreatePost={data?.permissions.canCreatePost} />
         </CommandBar>
       </div>
+      {error && <div className="text-red-500">{error.message}</div>}
       <table className="w-full mt-12">
         <thead>
           <tr className="border-b-2 border-gray-400">
@@ -72,7 +80,7 @@ export default function PostsClassic() {
           </tr>
         </thead>
         <tbody>
-          {posts.map((post) => (
+          {data.posts.map((post) => (
             <tr key={post.id} className="border-b border-gray-400">
               <td className="p-1 border-gray-400 py-2">{post.id}</td>
               <td className="p-1 text-left py-2">{post.content}</td>

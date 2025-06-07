@@ -9,10 +9,15 @@ Rails.application.routes.draw do
   # All requests to `/react/*` are handled by ReactController#show.
   match "react", to: "react#show", via: :all
   get "react/*path", to: "react#show"
+
+  resource :context, only: [ :show ]
   resources :users do
     get :me, on: :collection
   end
   resources :posts
+  resource :private do
+    get :private, on: :member
+  end
   resources :sessions, only: [ :new, :create, :destroy ]
   resources :fixtures, only: [ :create ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

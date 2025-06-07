@@ -14,5 +14,7 @@ export default [
     route("posts/new", "routes/posts/new.tsx"),
     route("posts/classic", "routes/posts/classic.tsx"),
     route("fixtures", "routes/fixtures/home.tsx"),
+    route("private", "routes/private/home.tsx"),
+    route("private/private", "routes/private/private.tsx"),
   ]),
 ] satisfies RouteConfig;

@@ -7,16 +7,15 @@
   <%= form_with url: sessions_path, method: :post, class: "form" do |f| %>
     <div class="form__group">
       <%= f.label :email, "Email (sazae@example.com)", class: "form__label" %>
-      <%= f.text_field :email, class: "form__input" %>
+      <%= f.text_field :email, class: "form__input", required: true %>
     </div>
     <div class="form__group">
       <%= f.label :clear_passwords, "Password (hogehoge)", class: "form__label" %>
-      <%= f.password_field :clear_password, class: "form__input" %>
+      <%= f.password_field :clear_password, class: "form__input", required: true %>
     </div>
     <div class="form__group">
-      <%= f.button type: :submit, class: "button button--primary font-bold",
-                   data: {controller: "loadable", action: "click->loadable#activate"} do %>
-        <span class="button__loader"></span>Login
+      <%= f.button type: :submit, class: "button button--primary font-bold" do %>
+        <span class="button-loader"></span>Login
       <% end %>
     </div>
   <% end %>

@@ -1,15 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="loadable"
+// Connects to data-controller="loaderable"
 export default class extends Controller {
   connect() {
   }
 
   disconnect(event) {
-    this.element.ariaDisabled = false
+    this.element.ariaBusy = false
   }
 
   activate() {
-    this.element.ariaDisabled = true
+    this.element.ariaBusy = true
   }
 }

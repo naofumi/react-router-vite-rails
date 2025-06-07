@@ -1,6 +1,9 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+# Mocking/Stubbing support
+require "minitest/mock"
+require "ostruct"
 
 module ActiveSupport
   class TestCase
@@ -11,5 +14,10 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def login_as(user, &block)
+      SessionAuthentication.stub :new, ->(*) { OpenStruct.new(current_resource: user) } do
+        block.call
+      end
+    end
   end
 end

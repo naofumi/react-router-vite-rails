@@ -1,10 +1,13 @@
 # React-Router-Vite-Rails
 
-This is an example web application that is built using the [react_router_rails_spa gem](https://rubygems.org/gems/react_router_rails_spa).
+This is an example web application built using the [react_router_rails_spa gem](https://rubygems.org/gems/react_router_rails_spa).
+It demonstrates a typical structure of a React Router SPA mode application with Ruby on Rails integration.
 
-In addition to being very simple to set up, using an SPA framework like React Router has multiple UI/UX benefits.  
+Please read more about the [react_router_rails_spa gem](https://rubygems.org/gems/react_router_rails_spa)
+to understand how the integration works.
 
-- [Jump to read how to build it](#how-it-is-built)
+In addition to having a simple setup procedure, using an SPA framework like React Router has multiple UI/UX benefits.  
+
 - [See this example app deployed using Kamal](https://rrrails.castle104.com)
 
 ## Development set up
@@ -28,7 +31,7 @@ described in the [react_router_rails_spa gem README](https://github.com/naofumi/
 
 Well, actually,
 deployment builds on top of `bin/rails assets:precompile`
-so there is nothing special to do here except maybe install Node in your CI/CD if you haven't already.
+so there is nothing special to do here except maybe install Node in your CI/CD if you have not already.
 
 ## Features
 
@@ -46,7 +49,7 @@ Loader-based fetching allows parallel loading of code-split fragments and page d
 ensuring that code-splitting does not cause decrease performance due to request waterfalls.
 You can benefit from code-splitting without compromising on page-load performance.
 
-It also eliminates fidgety and distracting flicker that is often seen in SPAs due to stepwise loading of multiple elements.
+It also eliminates fidgety and distracting flicker often seen in SPAs due to stepwise loading of multiple elements.
 
 In short, embracing loader-based fetching will improve the UI/UX of your application.
 
@@ -74,21 +77,22 @@ Please take a look and confirm that there are no additional steps compared to a 
 
 This demo includes ERB views and a simple authentication implementation.
 Note how you can easily switch between ERB and React views and that they seamlessly share authentication status.
+(This works on preview or production builds)
 
 This is possible because the React application lives inside the Rails `public` folder
 and shares the same domain and hence cookies. 
 
 ### SEO-optimized Pages with ERB
 
-In dynamic React-based applications, you're often faced with two choices:
-leveraging server-side rendering (SSR) for SEO optimization (e.g., with frameworks like Next.js)
-or deploying a static SPA for the simplicity of serving static assets.
-However, this dichotomy is false — you can, in fact, have your cake and eat it too.
+In dynamic React-based applications, you are often faced with two choices:
 
-As I mentioned above, you can easily integrate SEO-optimized, server-side rendered ERB pages with static React SPA pages.
+- Leveraging server-side rendering (SSR) for SEO optimization (e.g., with frameworks like Next.js)
+- Deploying a simple static SPA
 
-For dynamic pages that need to be SEO-optimized, just use ERB and optionally use Hotwire for interactivity.
-For other pages, you can use a React SPA that is hosted on the Rails `public` folder.
+However, this is a false dichotomy — you can have your cake and eat it too.
+
+The solution is to use traditional server-side rendered pages for SEO pages (i.e., ERB).
+For other pages, you can use a React SPA.
 
 ### Reduce flicker with loaders
 
@@ -98,3 +102,17 @@ With React Router SPA framework mode, you can eliminate flicker by loading data 
 This demo provides two identical pages that differ by loading strategy only.
 You can compare the UX of a flicker-less page using a loader,
 and a flickering page built in the traditional way with useEffect.
+
+### Layouts for global state management
+
+SPA applications often store information in global state.
+For example, you might store information about the logged-in user (typically from a `/me` endpoint),
+theme, locale, feature toggles
+(flags) etc.
+
+However, React Router SPA framework mode's layout feature offers a simpler alternative.
+React Router's `useRouteLoaderData()` gives you access to any active layout's loader data, 
+which makes it available to any component using that layout.
+You can use it as a layout-scoped global state manager.
+
+Furthermore, loader data is automatically requested, cached, and revalidated, simplifying life cycle management.

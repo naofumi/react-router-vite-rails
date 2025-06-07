@@ -2,12 +2,12 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [ :index ]
   # GET /posts or /posts.json
   def index
-    @posts = Post.all.order(id: :desc)
+    @posts = Post.includes(:author).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = current_user.posts.build
 
     respond_to do |format|
       format.html
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
@@ -33,6 +33,6 @@ class PostsController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def post_params
-      params.expect(post: [ :content ])
+      params.expect!(post: [ :content ])
     end
 end
