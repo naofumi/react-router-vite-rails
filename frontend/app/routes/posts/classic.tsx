@@ -11,28 +11,11 @@ import SwitchLoadingModes from "~/routes/posts/components/SwitchLoadingModes"
 import {useApplicationContext} from "~/layouts/useApplicationContext"
 import {z} from "zod/v4"
 import PostsTable from "./components/PostsTable"
+import {apiSchema} from "./home"
 
 /*
 * This page uses page-tailored APIs
 * */
-export const apiSchema = z.strictObject({
-  posts: z.array(z.strictObject({
-    id: z.number(),
-    content: z.string(),
-    author: z.strictObject({
-      email: z.string(),
-    }),
-    highlighted: z.boolean(),
-    canEditPost: z.boolean(),
-    createdAt: z.iso.datetime({offset: true}).transform((date) => new Date(date)),
-  })),
-  pagination: z.strictObject({
-    prevPage: z.number().nullable(),
-    nextPage: z.number().nullable()
-  }),
-  permissions: z.strictObject({canCreatePost: z.boolean()})
-});
-
 export async function clientLoader({params}: Route.ClientLoaderArgs) {
   return null
 }
