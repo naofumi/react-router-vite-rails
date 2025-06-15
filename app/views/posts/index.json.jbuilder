@@ -15,7 +15,7 @@ json.posts do
     end
     json.highlighted Permissions::Post.can_edit?(current_user, post)
     # We send permissions to the server so that
-    # the client doesn't have to contain authorization logic.
+    # the client doesn't have to contain any authorization logic.
     json.can_edit_post Permissions::Post.can_edit?(current_user, post)
     json.created_at post.created_at.iso8601
   end
@@ -26,7 +26,7 @@ json.pagination do
   json.prev_page @posts.prev_page
 end
 # We send permissions to the server so that
-# the client doesn't have to contain authorization logic.
+# the client doesn't have to contain any authorization logic.
 json.permissions do
   json.can_create_post Permissions::Post.can_create?(current_user)
 end
