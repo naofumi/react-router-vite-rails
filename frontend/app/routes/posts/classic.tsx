@@ -4,12 +4,13 @@ import {baseApiPath} from "~/utilities/proxy"
 import Main from "~/components/Main"
 import CommandBar from "~/components/CommandBar"
 import ButtonDangerOutline from "~/components/ButtonDangerOutline"
-import { NewPostButton } from "./components/NewPostButton"
+import {NewPostButton} from "./components/NewPostButton"
 import TechnologySwitchToErb from "~/components/TechnologySwitchToErb"
 import {useEffect, useState} from "react"
 import SwitchLoadingModes from "~/routes/posts/components/SwitchLoadingModes"
 import {useApplicationContext} from "~/layouts/useApplicationContext"
-import {z} from "zod"
+import {z} from "zod/v4"
+import PostsTable from "./components/PostsTable"
 
 /*
 * This page uses page-tailored APIs
@@ -18,17 +19,23 @@ export const apiSchema = z.strictObject({
   posts: z.array(z.strictObject({
     id: z.number(),
     content: z.string(),
-    url: z.string(),
     author: z.strictObject({
       email: z.string(),
     }),
     highlighted: z.boolean(),
     canEditPost: z.boolean(),
+    createdAt: z.iso.datetime({offset: true}).transform((date) => new Date(date)),
   })),
+  pagination: z.strictObject({
+    prevPage: z.number().nullable(),
+    nextPage: z.number().nullable()
+  }),
   permissions: z.strictObject({canCreatePost: z.boolean()})
 });
 
-export async function clientLoader({params}: Route.ClientLoaderArgs) { return null }
+export async function clientLoader({params}: Route.ClientLoaderArgs) {
+  return null
+}
 
 export function meta() {
   return [
@@ -39,8 +46,12 @@ export function meta() {
 export default function PostsClassic() {
   const {context} = useApplicationContext()
 
-  const [data, setData] = useState<z.infer<typeof apiSchema>>({posts: [], permissions: {canCreatePost: false}})
-  const [error, setError] = useState<{status: number, message: string} | null>(null)
+  const [data, setData] = useState<z.infer<typeof apiSchema>>({
+    posts: [],
+    pagination: {prevPage: null, nextPage: null},
+    permissions: {canCreatePost: false}
+  })
+  const [error, setError] = useState<{ status: number, message: string } | null>(null)
 
   useEffect(() => {
     (async () => {
@@ -59,7 +70,7 @@ export default function PostsClassic() {
 
   return (
     <Main title="Posts" subtitle="with useEffect-based data loading">
-      <TechnologySwitchToErb url="/posts" />
+      <TechnologySwitchToErb url="/posts"/>
       <SwitchLoadingModes url="/posts" label="loader pattern"/>
       <div className="mt-8">
         <CommandBar>
@@ -68,26 +79,11 @@ export default function PostsClassic() {
               <ButtonDangerOutline type="submit">Reset Data</ButtonDangerOutline>
             </Form> :
             <div></div>}
-          <NewPostButton canCreatePost={data?.permissions.canCreatePost} />
+          <NewPostButton canCreatePost={data?.permissions.canCreatePost}/>
         </CommandBar>
       </div>
       {error && <div className="text-red-500">{error.message}</div>}
-      <table className="w-full mt-12">
-        <thead>
-          <tr className="border-b-2 border-gray-400">
-            <th className="p-1 border-gray-400">ID</th>
-            <th>Title</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.posts.map((post) => (
-            <tr key={post.id} className="border-b border-gray-400">
-              <td className="p-1 border-gray-400 py-2">{post.id}</td>
-              <td className="p-1 text-left py-2">{post.content}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {data && <PostsTable posts={data.posts}/>}
     </Main>
-  );
+  )
 }
