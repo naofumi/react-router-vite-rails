@@ -16,7 +16,7 @@
 # * By going through the Rails controller, we can adjust the cache and cookie headers to
 #   improve performance, reliability, and integration with Rails.
 #
-# The included ReactRouterRailsSpa::CsrfCookieEnabled module will 
+# The included ReactRouterRailsSpa::CsrfCookieEnabled module will
 # send the CSRF token inside the "X-CSRF-Token" cookie for use inside your React app.
 class ReactController < ApplicationController
   include ReactRouterRailsSpa::CsrfCookieEnabled

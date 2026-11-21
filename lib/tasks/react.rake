@@ -18,7 +18,7 @@ namespace :react_router do
   #
   # bin/rails react_router:dev
   desc "Start React Router Development Server with Hot Module Reloading"
-  task dev: [:npm_install] do
+  task dev: [ :npm_install ] do
     puts "Starting React Router v7 app development server..."
     Dir.chdir("#{Dir.pwd}/frontend") do
       system("npm", "run", "dev")
@@ -27,7 +27,7 @@ namespace :react_router do
 
   # bin/rails react_router:typecheck
   desc "Check Typescript for the React Router App"
-  task typecheck: [:npm_install] do
+  task typecheck: [ :npm_install ] do
     puts "Check Typescript for React Router v7 app..."
     Dir.chdir("#{Dir.pwd}/frontend") do
       system("npm", "run", "typecheck")
@@ -42,7 +42,7 @@ namespace :react_router do
   #
   # bin/rails react_router:build
   desc "Build React Router App and move to the public folder"
-  task build: [:npm_install] do
+  task build: [ :npm_install ] do
     puts "Building React Router v7 app..."
     `cd frontend && npm run build`
 
@@ -59,7 +59,7 @@ namespace :react_router do
   # This is identical to running bin/rails react_router: build
   # and is provided solely to align better with intent.
   desc "Preview your React Router App from the Rails development server (typically port 3000)"
-  task preview: [:build]
+  task preview: [ :build ]
 
   # Run bin/rails react_router:clobber to remove the build files.
   # Running bin/rails assets:clobber will also run this task.
@@ -75,5 +75,5 @@ end
 # This means that any normal Rails deployment script which
 # contains rake assets:precompile will also build the
 # React Router app automatically.
-Rake::Task["assets:precompile"].enhance(["react_router:build"])
-Rake::Task["assets:clobber"].enhance(["react_router:clobber"])
+Rake::Task["assets:precompile"].enhance([ "react_router:build" ])
+Rake::Task["assets:clobber"].enhance([ "react_router:clobber" ])
