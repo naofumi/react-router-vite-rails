@@ -64,4 +64,4 @@ end
 
 gem "react_router_rails_spa"
 
-gem "kaminari", "~> 1.2"
+gem "kaminari", "~> 1.3"
