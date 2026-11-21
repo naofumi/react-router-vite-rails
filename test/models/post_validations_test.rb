@@ -2,7 +2,8 @@ require "test_helper"
 
 class PostValidationsTest < ActiveSupport::TestCase
   def setup
-    @author = User.new
+    # belongs_to requires a persisted author; an unsaved User fails "Author must exist".
+    @author = User.create!(email: "author@example.com", clear_password: "secret")
   end
 
   test "post without content is invalid" do
