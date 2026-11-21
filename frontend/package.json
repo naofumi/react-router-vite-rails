@@ -27,7 +27,7 @@
     "react-router-devtools": "^1.1.10",
     "tailwindcss": "^4.3.5",
     "typescript": "^5.9.3",
-    "vite": "^6.4.6",
+    "vite": "^8.3.8",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.7"
   }
