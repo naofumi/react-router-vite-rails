@@ -19,10 +19,8 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      # EOLRails reports that Rails 8.0 is outside security support. That upgrade
-      # is a separate change; drop --except EOLRails once Rails 8.1 is on main.
       - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager --except EOLRails
+        run: bin/brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
