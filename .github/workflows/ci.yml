@@ -70,6 +70,16 @@ jobs:
         working-directory: frontend
         run: npm ci && npm run typecheck
 
+      - name: Run frontend tests
+        working-directory: frontend
+        run: npm test -- --run
+
+      - name: Build the production SPA
+        working-directory: frontend
+        env:
+          RAILS_ENV: production
+        run: npm run build
+
   test:
     runs-on: ubuntu-latest
 
@@ -92,6 +102,26 @@ jobs:
         env:
           RAILS_ENV: test
         run: bin/rails db:test:prepare test test:system
+
+      - name: Verify Puma startup
+        env:
+          PORT: 3100
+          RAILS_ENV: test
+        run: |
+          log="$RUNNER_TEMP/puma.log"
+          bundle exec puma -C config/puma.rb > "$log" 2>&1 &
+          puma_pid=$!
+          trap 'kill "$puma_pid" 2>/dev/null || true; cat "$log"' EXIT
+          for attempt in {1..30}; do
+            if curl --silent --fail --max-time 2 --output /dev/null http://127.0.0.1:3100/up; then
+              exit 0
+            fi
+            if ! kill -0 "$puma_pid" 2>/dev/null; then
+              exit 1
+            fi
+            sleep 1
+          done
+          exit 1
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v7

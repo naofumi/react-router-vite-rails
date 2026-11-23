@@ -1,0 +1,129 @@
+name: Merge tested Dependabot updates
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  merge:
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_repository.id == github.event.repository.id &&
+      github.event.workflow_run.actor.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Squash-merge the exact tested update
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from urllib.error import HTTPError
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+
+          with open(os.environ['GITHUB_EVENT_PATH']) as file:
+              event = json.load(file)
+          repository = event['repository']
+          run = event['workflow_run']
+          bot = 'dependabot[bot]'
+          branch = run.get('head_branch') or ''
+          sha = run.get('head_sha')
+          base = repository['default_branch']
+          root = f"{os.environ['GITHUB_API_URL']}/repos/{repository['full_name']}"
+          headers = {
+              'Accept': 'application/vnd.github+json',
+              'Authorization': f"Bearer {os.environ['GH_TOKEN']}",
+              'X-GitHub-Api-Version': '2022-11-28',
+          }
+
+          def api(path, query=None, data=None):
+              url = root + path + (f'?{urlencode(query)}' if query else '')
+              body = json.dumps(data).encode() if data is not None else None
+              request = Request(url, data=body, headers=headers,
+                                method='PUT' if body is not None else 'GET')
+              if body is not None:
+                  request.add_header('Content-Type', 'application/json')
+              with urlopen(request, timeout=30) as response:
+                  return json.load(response)
+
+          if run['path'] != '.github/workflows/ci.yml' or not sha:
+              raise SystemExit('No trusted CI run matched.')
+
+          allowed = {
+              'dependabot/bundler/': {'Gemfile', 'Gemfile.lock'},
+              'dependabot/npm_and_yarn/': {'frontend/package.json', 'frontend/package-lock.json'},
+              'dependabot/github_actions/': {'.github/workflows/ci.yml'},
+          }
+          paths = next((paths for prefix, paths in allowed.items() if branch.startswith(prefix)), None)
+          if paths is None:
+              raise SystemExit('No configured Dependabot ecosystem matched the branch.')
+
+          candidates = api('/pulls', {'state': 'open', 'head': f"{repository['owner']['login']}:{branch}", 'base': base})
+          if not candidates:
+              print('No open update pull request matched.')
+              raise SystemExit(0)
+          if len(candidates) != 1:
+              raise SystemExit('Ambiguous pull request match.')
+          pull = f"/pulls/{candidates[0]['number']}"
+          pr = api(pull)
+          if (pr['user']['login'] != bot or pr['user']['type'] != 'Bot' or
+              pr['head']['repo']['id'] != repository['id'] or pr['head']['ref'] != branch or
+              pr['base']['repo']['id'] != repository['id'] or pr['base']['ref'] != base or
+              pr['head']['sha'] != sha or pr['state'] != 'open' or pr['draft'] or pr['commits'] != 1):
+              print('The open pull request does not match the tested bot update.')
+              raise SystemExit(0)
+
+          commits = api(f'{pull}/commits')
+          if (len(commits) != 1 or commits[0]['sha'] != sha or
+              (commits[0].get('author') or {}).get('login') != bot or
+              not commits[0]['commit']['verification']['verified']):
+              print('The update is not one verified Dependabot commit.')
+              raise SystemExit(0)
+
+          files = api(f'{pull}/files')
+          if (not 1 <= pr['changed_files'] <= len(paths) or len(files) != pr['changed_files'] or
+              any(file['status'] != 'modified' or file['filename'] not in paths for file in files)):
+              print('The update touches files outside the supported dependency paths.')
+              raise SystemExit(0)
+
+          run_path = f"/actions/runs/{run['id']}/attempts/{run['run_attempt']}"
+          jobs = api(f'{run_path}/jobs', {'per_page': 100})['jobs']
+          required = {'scan_ruby', 'scan_js', 'lint', 'typecheck', 'test'}
+          checked = [job for job in jobs if job['name'] in required]
+          if len(checked) != len(required) or {job['name'] for job in checked} != required or any(
+              job['conclusion'] != 'success' for job in checked
+          ):
+              raise SystemExit('An expected CI job did not succeed.')
+
+          runs = api(f"/actions/workflows/{run['workflow_id']}/runs", {
+              'event': 'pull_request', 'branch': branch, 'head_sha': sha, 'per_page': 1,
+          })['workflow_runs']
+          if not runs or (runs[0]['id'], runs[0]['run_attempt'], runs[0]['conclusion']) != (
+              run['id'], run['run_attempt'], 'success'
+          ):
+              print('A later CI run superseded this result.')
+              raise SystemExit(0)
+
+          # GitHub enforces the branch rules, and the SHA prevents a head-change race.
+          try:
+              merge = api(f'{pull}/merge', data={'sha': sha, 'merge_method': 'squash'})
+          except HTTPError as error:
+              if error.code in {405, 409}:
+                  message = json.load(error).get('message', '')
+                  print(f'GitHub did not allow the merge ({error.code}) {message}')
+                  raise SystemExit(0)
+              raise
+          if not merge['merged']:
+              raise SystemExit(merge['message'])
+          print(f"Merged Dependabot PR #{pr['number']} as {merge['sha']}.")
+          PY
