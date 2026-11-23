@@ -15,7 +15,7 @@ In addition to having a simple setup procedure, using an SPA framework like Reac
 These are the steps to get the current repository running on your machine.
 
 * Download the GitHub respository.
-* Use the Ruby version in `.ruby-version` and Node.js 22.12 or a newer 22.x release.
+* Use the Ruby version in `.ruby-version` and Node.js 22.22 or a newer 22.x release.
 * Install dependencies with `bundle install`
 * Start the Ruby on Rails application with `bin/dev`
 * Build the React application with `bin/rails react_router:preview`
