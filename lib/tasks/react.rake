@@ -19,7 +19,7 @@ namespace :react_router do
   # bin/rails react_router:dev
   desc "Start React Router Development Server with Hot Module Reloading"
   task dev: [ :npm_install ] do
-    puts "Starting React Router v7 app development server..."
+    puts "Starting React Router app development server..."
     Dir.chdir("#{Dir.pwd}/frontend") do
       system("npm", "run", "dev")
     end
@@ -28,7 +28,7 @@ namespace :react_router do
   # bin/rails react_router:typecheck
   desc "Check Typescript for the React Router App"
   task typecheck: [ :npm_install ] do
-    puts "Check Typescript for React Router v7 app..."
+    puts "Check Typescript for React Router app..."
     Dir.chdir("#{Dir.pwd}/frontend") do
       system("npm", "run", "typecheck")
     end
@@ -43,7 +43,7 @@ namespace :react_router do
   # bin/rails react_router:build
   desc "Build React Router App and move to the public folder"
   task build: [ :npm_install ] do
-    puts "Building React Router v7 app..."
+    puts "Building React Router app..."
     `cd frontend && npm run build`
 
     puts "Moving build files to public/react..."
@@ -64,7 +64,7 @@ namespace :react_router do
   # Run bin/rails react_router:clobber to remove the build files.
   # Running bin/rails assets:clobber will also run this task.
   task :clobber do
-    puts "Clobbering React Router v7 app build files..."
+    puts "Clobbering React Router app build files..."
     FileUtils.rm_rf("#{Dir.pwd}/public/react-router")
   end
 end
