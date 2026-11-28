@@ -46,6 +46,7 @@ class UserFacingSmokeTest < ApplicationSystemTestCase
     assert_text "sazae@example.com"
 
     click_button "Logout"
-    assert_link "Login"
+    visit "/react/posts/new"
+    assert_current_path "/react/sessions/new"
   end
 end

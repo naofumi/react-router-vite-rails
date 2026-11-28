@@ -30,7 +30,7 @@ This covers the public entry point, the Rails-rendered list, the React Router sh
 1. Open `/react/posts/new` as a guest. The Rails JSON authorization response should route the browser to `/react/sessions/new`.
 2. Sign in with the `sazae` test fixture (`sazae@example.com` / `hogehoge`) and confirm the React post list identifies the signed-in user.
 3. Switch to `/posts`, create a post through the ERB form, and confirm it appears in the list.
-4. Switch back to `/react/posts`, confirm the new post and signed-in identity are still visible, then log out and confirm the login link returns.
+4. Switch back to `/react/posts`, confirm the new post and signed-in identity are still visible, then log out and confirm the protected post route sends the visitor back to login.
 
 This covers the login boundary, the Rails session cookie and CSRF handoff, a persisted create action, and shared authentication state across Rails and React Router.
 
