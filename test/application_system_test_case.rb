@@ -25,7 +25,7 @@ module Chrome158StorageReset
   end
 end
 
-Capybara::Selenium::ChromeDriver.prepend(Chrome158StorageReset)
+Capybara::Selenium::Driver::ChromeDriver.prepend(Chrome158StorageReset)
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :selenium, using: :headless_chrome, screen_size: [ 1400, 1400 ]
