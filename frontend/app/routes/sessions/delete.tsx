@@ -8,7 +8,7 @@ export async function clientAction({request, params}: Route.ClientActionArgs) {
   if (request.method.toUpperCase() === 'DELETE') {
     const res = await fetch(`${baseApiPath()}/sessions/${params.id}`, {
       method: "DELETE",
-      headers: defaultPostHeaders
+      headers: {...defaultPostHeaders, "X-CSRF-Token": getCSRFToken()}
     })
     return redirect("/")
   }
